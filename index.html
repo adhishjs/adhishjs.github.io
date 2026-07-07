@@ -79,6 +79,19 @@
             color: var(--white);
             background: transparent;
         }
+
+        /* ── under construction note ── */
+        .construction-note {
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            color: var(--gray-3);
+            margin-top: 32px;
+            letter-spacing: 0.04em;
+            border-top: 1px solid var(--line);
+            padding-top: 24px;
+            display: inline-block;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             .cursor { animation: none; }
         }
@@ -95,6 +108,11 @@
             .btn {
                 padding: 10px 20px;
                 font-size: 0.78rem;
+            }
+            .construction-note {
+                font-size: 0.7rem;
+                padding-top: 18px;
+                margin-top: 24px;
             }
         }
     </style>
@@ -117,6 +135,7 @@
             <nav class="nav-links">
                 <a href="index.html" class="active">Home</a>
                 <a href="about.html">About</a>
+                <a href="education.html">Education</a>
                 <a href="projects.html">Projects</a>
                 <a href="experience.html">Experience</a>
                 <a href="contact.html">Contact</a>
@@ -135,6 +154,7 @@
                     <a class="btn" href="projects.html">View Projects</a>
                     <a class="btn btn-ghost" href="contact.html">Get in Touch</a>
                 </div>
+
             </div>
         </section>
     </main>
@@ -147,9 +167,7 @@
         // ── HIDE PRELOADER ──
         (function hidePreloader() {
             const finish = () => document.body.classList.add('is-loaded');
-            // On load
             window.addEventListener('load', finish);
-            // Fallback: if load takes too long, hide after 1.2s
             setTimeout(finish, 1200);
         })();
 
@@ -160,9 +178,11 @@
 
             const roles = [
                 'Analog & Mixed-Signal IC Designer',
-                'ASIC Tapeout Engineer',
-                '20nm FinFET Circuit Designer',
-                'Neuromorphic Chip Architect'
+                'Custom ASIC Design Engineer',
+                'Neuromorphic Computing Researcher',
+                'FPGA & Embedded Systems Engineer',
+                'Low-Power Circuit Designer',
+                'Semiconductor Engineering Enthusiast'
             ];
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

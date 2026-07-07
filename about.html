@@ -1,225 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Adhish JS</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — Adhish JS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* ── conference block on the right ── */
+        .conference-block {
+            border: 1px solid var(--line);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 24px;
+            background: var(--bg-alt);
+            transition: border-color 0.2s;
+        }
+        .conference-block:hover {
+            border-color: var(--gray-2);
+        }
+        .conference-block .conf-label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 0 0 12px;
+            display: block;
+        }
+        .conference-block .conf-link {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.9rem;
+            color: var(--white);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            margin-bottom: 6px;
+            transition: opacity 0.15s;
+        }
+        .conference-block .conf-link:last-child {
+            margin-bottom: 0;
+        }
+        .conference-block .conf-link:hover {
+            opacity: 0.7;
+        }
+        .conference-block .conf-link .arrow {
+            color: var(--gray-2);
+            margin-left: 4px;
+        }
+        .about-text p {
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
 
-<div class="preloader" aria-hidden="true">
-  <span class="preloader-mark">ADHISH JS</span>
-  <div class="preloader-bar"></div>
-  <span class="preloader-status">loading</span>
-</div>
-
-<div class="grid-overlay" aria-hidden="true"></div>
-
-<header class="nav">
-  <div class="nav-inner">
-    <span class="nav-name">ADHISH JS</span>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
-      <a href="projects.html">Projects</a>
-      <a href="experience.html">Experience</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-  <header class="page-header">
-    <div class="section-inner">
-      <h1 class="page-title">About</h1>
-      <p class="page-sub">Education, background, and how I got here.</p>
+    <div class="preloader" aria-hidden="true">
+        <span class="preloader-mark">ADHISH JS</span>
+        <div class="preloader-bar"></div>
+        <span class="preloader-status">loading</span>
     </div>
-  </header>
 
-  <section class="section">
-    <div class="section-inner">
-      <p class="section-label">Bio</p>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>I'm a final-year B.Tech student in Electronics and Communication Engineering at
-          <strong>NIT Puducherry</strong> (CGPA 9.75/10), currently a Summer Research Intern at
-          <strong>IIT Madras</strong>, working on transistor and circuit characterization in
-          TSMC 180nm and PTM-MG 20nm FinFET technologies.</p>
-          <p>My core interest is <strong>analog and mixed-signal IC design</strong> — I've taken
-          two chips through tapeout on the SCL 180nm PDK, and spend most of my time in Cadence
-          Virtuoso debugging things at the transistor level rather than staying purely at the
-          architecture level.</p>
-          <p>I also work across the embedded/FPGA stack — Arduino, ESP32, Raspberry Pi, and FPGA
-          boards like Basys 3 and the PolarFire Icicle Kit — and have carried a few of those
-          projects through to published work.</p>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <header class="nav">
+        <div class="nav-inner">
+            <span class="nav-name">ADHISH JS</span>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="education.html">Education</a>
+                <a href="projects.html">Projects</a>
+                <a href="experience.html">Experience</a>
+                <a href="contact.html">Contact</a>
+            </nav>
         </div>
-        <dl class="about-stats">
-          <div class="stat"><dt>CGPA</dt><dd>9.75 / 10</dd></div>
-          <div class="stat"><dt>GATE 2026 (ECE)</dt><dd>AIR 835</dd></div>
-          <div class="stat"><dt>Tapeouts</dt><dd>2 (SCL 180nm)</dd></div>
-          <div class="stat"><dt>Publications</dt><dd>1 (IEEE ICEE 2025)</dd></div>
-        </dl>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <section class="section section-alt">
-    <div class="section-inner">
-      <p class="section-label">Education</p>
-      <ul class="edu-list">
-        <li>
-          <div>
-            <h4>National Institute of Technology Puducherry</h4>
-            <p>B.Tech, Electronics and Communication Engineering</p>
-            <span class="edu-date">Aug 2023 – Present</span>
-          </div>
-          <div class="edu-score">CGPA: 9.75/10</div>
-        </li>
-        <li>
-          <div>
-            <h4>Vijay Vikas International School (CBSE)</h4>
-            <p>Senior Secondary, Class XII</p>
-            <span class="edu-date">2023</span>
-          </div>
-          <div class="edu-score">95.2%</div>
-        </li>
-        <li>
-          <div>
-            <h4>Vedanta Academy (CBSE)</h4>
-            <p>Secondary, Class X</p>
-            <span class="edu-date">2021</span>
-          </div>
-          <div class="edu-score">92.2%</div>
-        </li>
-      </ul>
-    </div>
-  </section>
+    <main>
 
-  <section class="section">
-    <div class="section-inner">
-      <p class="section-label">Courses (B.Tech)</p>
-      <div class="courses-grid">
-        <!-- DUMMY DATA — replace with your actual B.Tech coursework -->
-        <div class="course-item"><h4>Digital Electronics &amp; Logic Design</h4><p>NIT Puducherry · 2024</p></div>
-        <div class="course-item"><h4>Analog &amp; Digital VLSI Design</h4><p>NIT Puducherry · 2025</p></div>
-        <div class="course-item"><h4>Signals &amp; Systems</h4><p>NIT Puducherry · 2024</p></div>
-        <div class="course-item"><h4>Semiconductor Device Physics</h4><p>NIT Puducherry · 2025</p></div>
-        <div class="course-item"><h4>Embedded Systems &amp; Microcontrollers</h4><p>NIT Puducherry · 2025</p></div>
-        <div class="course-item"><h4>Control Systems</h4><p>NIT Puducherry · 2024</p></div>
-      </div>
-    </div>
-  </section>
+        <header class="page-header">
+            <div class="section-inner">
+                <h1 class="page-title">About</h1>
+                <p class="page-sub">Who I am, what I do, and what drives me.</p>
+            </div>
+        </header>
 
-  <section class="section">
-    <div class="section-inner">
-      <p class="section-label">Skills</p>
-      <div class="specsheet">
-        <div class="specsheet-title">
-          <span>// component spec sheet</span>
-          <span>rev. 2026</span>
-        </div>
-        <div class="specsheet-row">
-          <div class="specsheet-label"><span>01</span>Programming</div>
-          <div class="specsheet-values">
-            <span class="tag-pill">Python</span>
-            <span class="tag-pill">C++</span>
-            <span class="tag-pill">Verilog</span>
-            <span class="tag-pill">MATLAB</span>
-          </div>
-        </div>
-        <div class="specsheet-row">
-          <div class="specsheet-label"><span>02</span>Cadence EDA</div>
-          <div class="specsheet-values">
-            <span class="tag-pill">Virtuoso</span>
-            <span class="tag-pill">Genus</span>
-            <span class="tag-pill">Innovus</span>
-            <span class="tag-pill">Xcelium</span>
-            <span class="tag-pill">JasperGold</span>
-            <span class="tag-pill">OrCAD</span>
-            <span class="tag-pill">Allegro PCB</span>
-          </div>
-        </div>
-        <div class="specsheet-row">
-          <div class="specsheet-label"><span>03</span>Siemens / Synopsys</div>
-          <div class="specsheet-values">
-            <span class="tag-pill">Calibre (DRC/LVS/PEX)</span>
-            <span class="tag-pill">Sentaurus Workbench</span>
-            <span class="tag-pill">Structure Editor</span>
-            <span class="tag-pill">Sentaurus Visual</span>
-          </div>
-        </div>
-        <div class="specsheet-row">
-          <div class="specsheet-label"><span>04</span>FPGA</div>
-          <div class="specsheet-values">
-            <span class="tag-pill">Vivado (Xilinx)</span>
-            <span class="tag-pill">Libero SoC (Microchip)</span>
-          </div>
-        </div>
-        <div class="specsheet-row">
-          <div class="specsheet-label"><span>05</span>Hardware</div>
-          <div class="specsheet-values">
-            <span class="tag-pill">Arduino Uno/Nano</span>
-            <span class="tag-pill">ESP32</span>
-            <span class="tag-pill">Raspberry Pi Pico &amp; 4</span>
-            <span class="tag-pill">Basys 3</span>
-            <span class="tag-pill">PolarFire Icicle Kit SoC</span>
-          </div>
-        </div>
-        <div class="specsheet-row">
-          <div class="specsheet-label"><span>06</span>Simulation</div>
-          <div class="specsheet-values">
-            <span class="tag-pill">LTspice</span>
-            <span class="tag-pill">QUCS</span>
-            <span class="tag-pill">Multisim</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <!-- ─── BIO ─── -->
+        <section class="section">
+            <div class="section-inner">
+                <p class="section-label">Bio</p>
+                <div class="about-grid">
+                    <!-- LEFT: Bio text (UPDATED) -->
+                    <div class="about-text">
+                        <p>I'm Adhish JS, a B.Tech student in Electronics and Communication Engineering at
+                        <strong>NIT Puducherry</strong>, passionate about designing intelligent hardware that
+                        bridges the gap between research and real-world applications. My primary interests lie
+                        in <strong>Analog &amp; Mixed-Signal IC Design</strong>, Digital ASIC Design,
+                        Neuromorphic Computing, and Embedded Systems, where I enjoy transforming ideas into
+                        efficient hardware solutions.</p>
 
-  <section class="section section-alt">
-    <div class="section-inner two-col">
-      <div>
-        <p class="section-label">Achievements</p>
-        <ul class="simple-list">
-          <li>Secured AIR 835 (Score: 682) in GATE 2026 (ECE)</li>
-          <li>Top Performer, Cohort 4 of ISWDP — jointly conducted by IISc, Synopsys, and
-          Samsung Semiconductor India Research</li>
-          <li>Finalist, VLSID Design Contest</li>
-          <li>School Topper, Grade 12</li>
-        </ul>
-      </div>
-      <div>
-        <p class="section-label">Leadership</p>
-        <ul class="simple-list">
-          <li>Vice President, ELECSA — directed club operations and organized technical
-          workshops and student events</li>
-          <li>Treasurer, ANTRIX Club — managed annual budget and financial planning</li>
-          <li>Class Representative, NSS — organized community initiatives and technical events</li>
-          <li>Class Committee Member — contributed to academic discussions and student affairs</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+                        <p>My journey into chip design began with embedded systems and FPGA development, where
+                        I discovered the excitement of building hardware from the ground up. Over time, that
+                        curiosity evolved into designing custom integrated circuits, leading me to work on
+                        <strong>two ASIC tapeouts</strong>, contribute to published research, and gain hands-on
+                        experience with the complete custom IC design flow — from circuit design and simulation
+                        to layout, verification, and post-layout analysis. These experiences have strengthened
+                        my interest in understanding of <strong>transistor-level</strong> circuit design while reinforcing the 
+                        importance of system-level thinking.</p>
 
-  <section class="section">
-    <div class="section-inner">
-      <p class="section-label">Languages</p>
-      <p>English (Advanced), Tamil (Native)</p>
-    </div>
-  </section>
+                        <p>Beyond ASIC design, I enjoy working across the hardware stack, including FPGA
+                        acceleration, PCB design, and embedded systems. I believe that a strong engineer should
+                        be comfortable moving between different levels of abstraction, whether designing analog
+                        circuits in Cadence Virtuoso, implementing digital architectures on FPGAs, or developing
+                        hardware-software solutions for edge AI applications.</p>
 
-</main>
+                        <p>I enjoy solving challenging engineering problems, continuously learning new
+                        technologies, and collaborating on projects that create meaningful impact. My long-term
+                        goal is to contribute to the development of high-performance, low-power semiconductor
+                        technologies while advancing research in analog, mixed-signal, and AI-focused hardware
+                        design.</p>
+                    </div>
 
-<footer class="footer">
-  <p>Built &amp; deployed on GitHub Pages.</p>
-</footer>
+                    <!-- RIGHT: Stats + Conferences -->
+                    <div>
+                        <dl class="about-stats">
+                            <div class="stat"><dt>CGPA</dt><dd>9.75 / 10</dd></div>
+                            <div class="stat"><dt>GATE 2026 (ECE)</dt><dd>AIR 835</dd></div>
+                            <div class="stat"><dt>Tapeouts</dt><dd>2</dd></div>
+                            <div class="stat"><dt>Publications</dt><dd>1</dd></div>
+                        </dl>
 
-<script src="script.js"></script>
+                        <!-- Conference box --> 
+                        <div class="conference-block">
+                            <span class="conf-label">International Conferences</span>
+                            <a class="conf-link" href="./project/project-snn-fpga.html">
+                                IEEE ICEE 2025 <span class="arrow">→</span>
+                            </a>
+                            <a class="conf-link" href="./project/project-fpga-prc-pss.html">
+                                VLSID 2026 <span class="arrow">→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── SKILLS ─── -->
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Skills</p>
+                <div class="specsheet">
+                    <div class="specsheet-title">
+                        <span>// component spec sheet</span>
+                        <span>rev. 2026</span>
+                    </div>
+                    <div class="specsheet-row">
+                        <div class="specsheet-label"><span>01</span>Programming</div>
+                        <div class="specsheet-values">
+                            <span class="tag-pill">Python</span>
+                            <span class="tag-pill">C++</span>
+                            <span class="tag-pill">Verilog</span>
+                            <span class="tag-pill">MATLAB</span>
+                        </div>
+                    </div>
+                    <div class="specsheet-row">
+                        <div class="specsheet-label"><span>02</span>Cadence EDA</div>
+                        <div class="specsheet-values">
+                            <span class="tag-pill">Virtuoso</span>
+                            <span class="tag-pill">Genus</span>
+                            <span class="tag-pill">Innovus</span>
+                            <span class="tag-pill">Xcelium</span>
+                            <span class="tag-pill">JasperGold</span>
+                            <span class="tag-pill">OrCAD</span>
+                            <span class="tag-pill">Allegro PCB</span>
+                        </div>
+                    </div>
+                    <div class="specsheet-row">
+                        <div class="specsheet-label"><span>03</span>Siemens / Synopsys</div>
+                        <div class="specsheet-values">
+                            <span class="tag-pill">Calibre (DRC/LVS/PEX)</span>
+                            <span class="tag-pill">Sentaurus Workbench</span>
+                            <span class="tag-pill">Structure Editor</span>
+                            <span class="tag-pill">Sentaurus Visual</span>
+                        </div>
+                    </div>
+                    <div class="specsheet-row">
+                        <div class="specsheet-label"><span>04</span>FPGA</div>
+                        <div class="specsheet-values">
+                            <span class="tag-pill">Vivado (Xilinx)</span>
+                            <span class="tag-pill">Libero SoC (Microchip)</span>
+                        </div>
+                    </div>
+                    <div class="specsheet-row">
+                        <div class="specsheet-label"><span>05</span>Hardware</div>
+                        <div class="specsheet-values">
+                            <span class="tag-pill">Arduino Uno/Nano</span>
+                            <span class="tag-pill">ESP32</span>
+                            <span class="tag-pill">Raspberry Pi Pico &amp; 4</span>
+                            <span class="tag-pill">Basys 3</span>
+                            <span class="tag-pill">PolarFire Icicle Kit SoC</span>
+                        </div>
+                    </div>
+                    <div class="specsheet-row">
+                        <div class="specsheet-label"><span>06</span>Simulation</div>
+                        <div class="specsheet-values">
+                            <span class="tag-pill">LTspice</span>
+                            <span class="tag-pill">QUCS</span>
+                            <span class="tag-pill">Multisim</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── ACHIEVEMENTS & LEADERSHIP ─── -->
+        <section class="section">
+            <div class="section-inner two-col">
+                <div>
+                    <p class="section-label">Achievements</p>
+                    <ul class="simple-list">
+                        <li>Secured AIR 835 (Score: 682) in GATE 2026 (ECE)</li>
+                        <li>Top Performer, Cohort 4 of ISWDP — jointly conducted by IISc, Synopsys, and Samsung Semiconductor India Research</li>
+                        <li>Finalist, VLSID Design Contest</li>
+                        <li>School Topper, Grade 12</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="section-label">Leadership</p>
+                    <ul class="simple-list">
+                        <li>Vice President, ELECSA — directed club operations and organized technical workshops and student events</li>
+                        <li>Treasurer, ANTRIX Club — managed annual budget and financial planning</li>
+                        <li>Class Representative, NSS — organized community initiatives and technical events</li>
+                        <li>Class Committee Member — contributed to academic discussions and student affairs</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── LANGUAGES ─── -->
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Languages</p>
+                <p>English (Advanced), Tamil (Native)</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>Built &amp; deployed on GitHub Pages.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

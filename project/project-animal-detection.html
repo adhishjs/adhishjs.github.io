@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real-Time Animal Detection — Adhish JS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="preloader" aria-hidden="true">
+  <span class="preloader-mark">ADHISH JS</span>
+  <div class="preloader-bar"></div>
+  <span class="preloader-status">loading</span>
+</div>
+
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <span class="nav-name">ADHISH JS</span>
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../projects.html" class="active">Projects</a>
+      <a href="../experience.html">Experience</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <header class="page-header">
+    <div class="section-inner">
+      <a class="back-link" href="../projects.html">← Back to Projects</a>
+      <h1 class="page-title">Real-Time Animal Detection and Alert System</h1>
+      <p class="page-sub">Raspberry Pi 4 · 92% Accuracy · Sep – Nov 2024</p>
+    </div>
+  </header>
+
+
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-label">Skills Used</p>
+      <div class="card-skills">
+        <span class="tag-pill">Python</span>
+        <span class="tag-pill">Raspberry Pi</span>
+        <span class="tag-pill">CNN (VGG19)</span>
+        <span class="tag-pill">IoT</span>
+      </div>
+      <div class="card-links">
+        <a class="link-github" href="https://github.com/adhishjs" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-label">Overview</p>
+      <p class="pdetail-desc">Add a longer write-up here: hardware setup, model choice, and how the
+      alert pipeline ties together sensor input, detection, and notification.</p>
+      <ul class="pdetail-list">
+        <li>Built a real-time wildlife monitoring system integrating an ultrasonic sensor,
+        USB camera, and a VGG19-based CNN for automated detection across 32 species.</li>
+        <li>Implemented an end-to-end alert pipeline uploading detected images to Google
+        Drive and sending SMS notifications via the SMSChef API.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="section-inner">
+      <p class="section-label">Preview / Screenshots</p>
+      <div class="pdetail-gallery">
+        <div class="placeholder">Add detection sample photo</div>
+        <div class="placeholder">Add hardware setup photo</div>
+        <div class="placeholder">Add alert notification screenshot</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-label">Code Preview</p>
+      <div class="code-panel">
+        <div class="code-panel-head"><span>python</span><span>placeholder</span></div>
+        <pre><code># If this project has a Python UI (e.g. a live camera feed
+# viewer or an alert-log dashboard), paste the real code here.
+#
+# Send me the .py file and I will drop the actual snippet in,
+# with the filename shown in the header above.
+
+def main():
+    pass
+
+if __name__ == "__main__":
+    main()</code></pre>
+      </div>
+      <p class="code-note">Placeholder — replace with your actual UI code.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="section-inner">
+      <p class="section-label">Report / PPT Preview</p>
+      <div class="doc-preview">
+        <!-- Add assets/animal-detection/report.pdf and update the src below to preview it inline -->
+        <iframe src="../assets/project/animal-detection/report.pdf" title="Report preview" loading="lazy"></iframe>
+        <p class="doc-preview-fallback">
+          Preview blank? Add your file at <code>../assets/project/animal-detection/report.pdf</code>.
+          For a PPT, once this site is live on GitHub Pages you can embed Google's viewer instead:
+          <code>https://docs.google.com/gviewer?url=YOUR_PPTX_URL&amp;embedded=true</code>.
+          Direct download: <a href="../assets/project/animal-detection/report.pdf" target="_blank" rel="noopener">report.pdf ↗</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Built &amp; deployed on GitHub Pages.</p>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

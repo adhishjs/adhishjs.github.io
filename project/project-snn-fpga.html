@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Publication — An Efficient FPGA Implementation of SNNs for N-MNIST Classification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+        /* ── publication detail styles ── */
+        .pub-detail-head {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 20px;
+        }
+        .pub-detail-head .pub-meta-item {
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            color: var(--gray-2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pub-detail-head .pub-meta-item strong {
+            color: var(--gray-1);
+            font-weight: 600;
+        }
+        .pub-section {
+            margin-bottom: 40px;
+        }
+        .pub-section:last-child {
+            margin-bottom: 0;
+        }
+        .pub-section .section-label {
+            margin-bottom: 16px;
+        }
+
+        /* ── ABSTRACT: justified text ── */
+        .pub-abstract {
+            color: var(--gray-1);
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 800px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        .pub-abstract p {
+            margin: 0 0 1em 0;
+        }
+        .pub-abstract strong {
+            color: var(--white);
+        }
+
+        .pub-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0 0;
+        }
+        .pub-highlight-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px 20px;
+            text-align: center;
+        }
+        .pub-highlight-card .number {
+            font-family: var(--mono);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
+            display: block;
+            line-height: 1.2;
+        }
+        .pub-highlight-card .label {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--gray-2);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-top: 4px;
+            display: block;
+        }
+        .pub-resource-table {
+            border: 1px solid var(--line);
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .pub-resource-table th,
+        .pub-resource-table td {
+            padding: 12px 18px;
+            border: 1px solid var(--line);
+            text-align: left;
+        }
+        .pub-resource-table th {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            background: var(--panel);
+        }
+        .pub-resource-table td {
+            color: var(--gray-1);
+        }
+        .pub-resource-table .highlight-row td {
+            color: var(--white);
+            font-weight: 500;
+        }
+        .pub-comparison-table {
+            border: 1px solid var(--line);
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+        .pub-comparison-table th,
+        .pub-comparison-table td {
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            text-align: left;
+        }
+        .pub-comparison-table th {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--gray-2);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            background: var(--panel);
+        }
+        .pub-comparison-table td {
+            color: var(--gray-1);
+        }
+        .pub-comparison-table .highlight-row td {
+            color: var(--white);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .pub-ppt-section {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--panel);
+        }
+        .pub-ppt-section iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            display: block;
+        }
+        .pub-links-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .pub-links-block a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            height: 44px;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.03em;
+            border: 1px solid var(--line);
+            color: var(--gray-2);
+            border-radius: 4px;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+            text-decoration: none;
+        }
+        .pub-links-block a:hover {
+            border-color: var(--white);
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .pub-links-block a svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* ── Gallery with lightbox ── */
+        .pub-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .pub-gallery figure {
+            margin: 0;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            cursor: pointer;
+        }
+        .pub-gallery figure:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+        .pub-gallery figure img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            background: var(--bg);
+        }
+        .pub-gallery figure figcaption {
+            padding: 10px 14px;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--gray-2);
+            text-align: center;
+            border-top: 1px solid var(--line);
+            letter-spacing: 0.03em;
+        }
+
+        /* ── Lightbox overlay ── */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.8rem;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 300;
+            transition: opacity 0.2s;
+            line-height: 1;
+            z-index: 10;
+        }
+        .lightbox-close:hover {
+            opacity: 0.6;
+        }
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3.5rem;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            user-select: none;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+        .lightbox-prev {
+            left: 20px;
+        }
+        .lightbox-next {
+            right: 20px;
+        }
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            opacity: 0.6;
+        }
+        .lightbox-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.4rem 1.5rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            max-width: 80%;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 10;
+        }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            z-index: 5;
+        }
+
+        @media (max-width: 700px) {
+            .pub-highlights {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .pub-resource-table,
+            .pub-comparison-table {
+                font-size: 0.7rem;
+            }
+            .pub-resource-table th,
+            .pub-resource-table td,
+            .pub-comparison-table th,
+            .pub-comparison-table td {
+                padding: 8px 10px;
+            }
+            .pub-ppt-section iframe {
+                height: 300px;
+            }
+            .pub-detail-head {
+                flex-direction: column;
+                gap: 6px;
+            }
+            .pub-highlight-card .number {
+                font-size: 1.4rem;
+            }
+            .pub-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .pub-gallery figure img {
+                height: 130px;
+            }
+            .lightbox-prev, .lightbox-next { font-size: 2.2rem; }
+            .lightbox-title { font-size: 0.9rem; white-space: normal; }
+            .lightbox-close { font-size: 2.2rem; top: 10px; right: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader" aria-hidden="true">
+        <span class="preloader-mark">ADHISH JS</span>
+        <div class="preloader-bar"></div>
+        <span class="preloader-status">loading</span>
+    </div>
+
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <!-- NAV -->
+    <header class="nav">
+        <div class="nav-inner">
+            <span class="nav-name">ADHISH JS</span>
+            <nav class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../education.html">Education</a>
+                <a href="../projects.html" class="active">Projects</a>
+                <a href="../experience.html">Experience</a>
+                <a href="../contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- PAGE HEADER -->
+        <header class="page-header">
+            <div class="section-inner">
+                <a class="back-link" href="../projects.html">← Back to Projects</a>
+                <h1 class="page-title">An Efficient FPGA Implementation of Spiking Neural Networks for N-MNIST Classification</h1>
+            </div>
+        </header>
+
+        <!-- ─── PUBLICATION DETAIL ─── -->
+        <section class="section">
+            <div class="section-inner">
+
+                <!-- Meta info row -->
+                <div class="pub-detail-head">
+                    <span class="pub-meta-item"><strong>Authors:</strong> Adhish JS, Vijaya Kumar K, Suresh Balanethiram</span>
+                    <span class="pub-meta-item"><strong>Conference:</strong> IEEE ICEE 2025</span>
+                </div>
+
+                <!-- Links -->
+                <div class="pub-links-block" style="margin-bottom: 32px;">
+                    <a href="https://ieeexplore.ieee.org/document/11409707" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        IEEE Xplore
+                    </a>
+                    <a href="https://github.com/adhishjs" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        GitHub (Code)
+                    </a>
+                </div>
+
+                <!-- ─── ABSTRACT (now justified) ─── -->
+                <div class="pub-section">
+                    <p class="section-label">Abstract</p>
+                    <div class="pub-abstract">
+                        <p>
+                            The demand for low-power artificial intelligence on edge devices has spurred research into
+                            brain-inspired computing paradigms like Spiking Neural Networks (SNNs). While SNNs promise
+                            significant energy savings, their implementation on resource-constrained hardware like FPGAs
+                            presents a considerable challenge for edge applications. This paper details a complete
+                            hardware-software co-design workflow for deploying an SNN for handwritten digit classification.
+                            A hardware-aware, three-layer SNN is trained offline in Python using a surrogate gradient method,
+                            and the learned weights are deployed for inference on a Xilinx Artix-7 FPGA. The architecture
+                            features a resource-efficient, <strong>multiplier-less digital Leaky Integrate-and-Fire (LIF) neuron</strong>
+                            and a time-multiplexed dataflow to minimize hardware utilization. Implemented on a Basys 3 board,
+                            our design achieves <strong>96.5% classification accuracy</strong> on the MNIST dataset, consuming only
+                            <strong>4,808 Look-Up Tables (LUTs)</strong> and <strong>2 DSP slices</strong>.
+                            These results demonstrate a highly competitive balance between accuracy and resource efficiency,
+                            validating the design's suitability for low-power edge applications.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- KEY HIGHLIGHTS -->
+                <div class="pub-section">
+                    <p class="section-label">Key Results</p>
+                    <div class="pub-highlights">
+                        <div class="pub-highlight-card">
+                            <span class="number">96.5%</span>
+                            <span class="label">MNIST Accuracy</span>
+                        </div>
+                        <div class="pub-highlight-card">
+                            <span class="number">4,808</span>
+                            <span class="label">Slice LUTs</span>
+                        </div>
+                        <div class="pub-highlight-card">
+                            <span class="number">2</span>
+                            <span class="label">DSP Slices</span>
+                        </div>
+                        <div class="pub-highlight-card">
+                            <span class="number">24.5</span>
+                            <span class="label">BRAM Tiles</span>
+                        </div>
+                        <div class="pub-highlight-card">
+                            <span class="number">~170</span>
+                            <span class="label">Power (mW)</span>
+                        </div>
+                        <div class="pub-highlight-card">
+                            <span class="number">4.4</span>
+                            <span class="label">Inference Time (ms)</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- COMPARISON TABLE -->
+                <div class="pub-section">
+                    <p class="section-label">Comparison with Other FPGA-Based Implementations</p>
+                    <table class="pub-comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>This Work</th>
+                                <th>[12] (ANN)</th>
+                                <th>[2]</th>
+                                <th>[4]</th>
+                                <th>[5]</th>
+                                <th>[6]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row">
+                                <td>Slice LUTs</td>
+                                <td><strong>4,808</strong></td>
+                                <td>6,895</td>
+                                <td>79,775</td>
+                                <td>29,145</td>
+                                <td>22,000</td>
+                                <td>27,288</td>
+                            </tr>
+                            <tr>
+                                <td>Neurons</td>
+                                <td>894</td>
+                                <td>864</td>
+                                <td>1,794</td>
+                                <td>1,384</td>
+                                <td>1,794</td>
+                                <td>1,794</td>
+                            </tr>
+                            <tr>
+                                <td>Architecture</td>
+                                <td>784–100–10</td>
+                                <td>784–30–30–10–10</td>
+                                <td>784–1000–10</td>
+                                <td>784–500–500–10</td>
+                                <td>784–500–500–10</td>
+                                <td>784–500–500–100</td>
+                            </tr>
+                            <tr>
+                                <td>BRAM</td>
+                                <td>25</td>
+                                <td>10</td>
+                                <td>15</td>
+                                <td>74</td>
+                                <td>52</td>
+                                <td>116</td>
+                            </tr>
+                            <tr>
+                                <td>DSP</td>
+                                <td><strong>2</strong></td>
+                                <td>16</td>
+                                <td>0</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>58</td>
+                            </tr>
+                            <tr>
+                                <td>Power</td>
+                                <td>~170mW</td>
+                                <td>190mW</td>
+                                <td>206W</td>
+                                <td>426mW</td>
+                                <td>6W</td>
+                                <td>1.1W–1.5W</td>
+                            </tr>
+                            <tr>
+                                <td>Accuracy</td>
+                                <td><strong>96.5%</strong></td>
+                                <td>95%</td>
+                                <td>95%</td>
+                                <td>74%</td>
+                                <td>92%</td>
+                                <td>92%</td>
+                            </tr>
+                            <tr>
+                                <td>Computation Time</td>
+                                <td>4.4ms</td>
+                                <td>–</td>
+                                <td>0.9ms</td>
+                                <td>215μs</td>
+                                <td>0.236ms</td>
+                                <td>152ms</td>
+                            </tr>
+                            <tr>
+                                <td>Neuron Model</td>
+                                <td><strong>LIF</strong></td>
+                                <td>ANN (ReLU)</td>
+                                <td>Adaptive LIF</td>
+                                <td>LIF</td>
+                                <td>LIF</td>
+                                <td>LIF</td>
+                            </tr>
+                            <tr>
+                                <td>Synapses</td>
+                                <td>79,100</td>
+                                <td>24,870</td>
+                                <td>647,000</td>
+                                <td>313,600</td>
+                                <td>647,000</td>
+                                <td>647,000</td>
+                            </tr>
+                            <tr>
+                                <td>Clock Frequency</td>
+                                <td>100MHz</td>
+                                <td>100MHz</td>
+                                <td>100MHz</td>
+                                <td>100MHz</td>
+                                <td>75MHz</td>
+                                <td>75MHz</td>
+                            </tr>
+                            <tr>
+                                <td>Platform</td>
+                                <td><strong>Artix-7</strong></td>
+                                <td>Artix-7</td>
+                                <td>Artix-7</td>
+                                <td>Artix-7</td>
+                                <td>Spartan-6</td>
+                                <td>Spartan-6</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- KEY CONTRIBUTIONS -->
+                <div class="pub-section">
+                    <p class="section-label">Key Contributions</p>
+                    <ul class="pdetail-list" style="margin: 0; padding-left: 20px;">
+                        <li><strong>Bias-free digital LIF neuron:</strong> Removed the bias term to reduce LUT demand while preserving spiking dynamics.</li>
+                        <li><strong>Hardware-aware training:</strong> Trained with surrogate gradients under fixed-point constraints matched to hardware, ensuring consistency between software and FPGA realization.</li>
+                        <li><strong>Time-multiplexed datapath:</strong> Single arithmetic unit sequentially computes weighted sums, significantly reducing LUT usage.</li>
+                        <li><strong>Multiplier-less architecture:</strong> Only 2 DSP slices used — an order of magnitude lower than comparable works.</li>
+                        <li><strong>Low-resource deployment:</strong> Fits on a low-end Basys 3 Artix-7 FPGA with only 4,808 LUTs.</li>
+                        <li><strong>State-of-the-art accuracy:</strong> 96.5% on MNIST — highest reported for resource-constrained FPGA SNN implementations.</li>
+                    </ul>
+                </div>
+                <!-- CONFERENCE PRESENTATION (PPT) -->
+                <div class="pub-section">
+                    <p class="section-label">Conference Presentation</p>
+                    <div class="pub-ppt-section">
+                        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTkjOQQHTruq6TE_FKGUU1Mqs6Bn67aph5lYfD4AeP5KmV-V332aQcE-c_vOVqORL8lTPoD88sGfGUE/pubembed?start=false&loop=false&delayms=60000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>                    </div>
+                </div>
+
+                <!-- ─── CONFERENCE GALLERY (with lightbox) ─── -->
+                <div class="pub-section">
+                    <p class="section-label">Conference Gallery — Hilton Embassy Bangalore</p>
+                    <div class="pub-gallery" id="galleryContainer">
+                        <figure>
+                            <img class="gallery-img" src="../assets/project/publication/pic_1.jpeg" alt="Conference photo 1" data-title="With fellow researchers at the venue" />
+                            <figcaption>With fellow researchers at the venue</figcaption>
+                        </figure>
+                        <figure>
+                            <img class="gallery-img" src="../assets/project/publication/pic_2.jpeg" alt="Conference photo 2" data-title="Presenting at IEEE ICEE 2025 — Hilton Embassy Bangalore" />
+                            <figcaption>Presenting at IEEE ICEE 2025</figcaption>
+                        </figure>
+                        <figure>
+                            <img class="gallery-img" src="../assets/project/publication/certificate.png" alt="Certificate" />
+                            <figcaption>Certificate of Presentation</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>Built &amp; deployed on GitHub Pages.</p>
+    </footer>
+
+    <!-- ===== LIGHTBOX HTML ===== -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <span class="lightbox-prev" id="lightboxPrev">&#10094;</span>
+        <span class="lightbox-next" id="lightboxNext">&#10095;</span>
+        <div class="lightbox-title" id="lightboxTitle">Title</div>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="Expanded view" />
+    </div>
+
+    <script src="../script.js"></script>
+    <script>
+        // ── Lightbox logic ──
+        (function() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxTitle = document.getElementById('lightboxTitle');
+            const closeBtn = document.getElementById('lightboxClose');
+            const prevBtn = document.getElementById('lightboxPrev');
+            const nextBtn = document.getElementById('lightboxNext');
+
+            const galleryContainer = document.getElementById('galleryContainer');
+            const images = galleryContainer.querySelectorAll('.gallery-img');
+            let currentIndex = 0;
+
+            function openLightbox(index) {
+                if (index < 0) index = images.length - 1;
+                if (index >= images.length) index = 0;
+                currentIndex = index;
+                const img = images[currentIndex];
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxTitle.textContent = img.dataset.title || img.alt || 'Image';
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function prevImage() {
+                openLightbox(currentIndex - 1);
+            }
+
+            function nextImage() {
+                openLightbox(currentIndex + 1);
+            }
+
+            images.forEach((img, idx) => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openLightbox(idx);
+                });
+            });
+
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', prevImage);
+            nextBtn.addEventListener('click', nextImage);
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevImage();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextImage();
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>
