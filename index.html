@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adhish JS — Analog & Mixed-Signal IC Design</title>
+    <meta name="description" content="Portfolio of Adhish JS — Analog/Mixed-Signal IC Design, ASIC tapeouts, and VLSI.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── minimal hero ── */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+        }
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px;
+            width: 100%;
+        }
+        .hero-name {
+            font-family: var(--mono);
+            font-weight: 800;
+            font-size: clamp(3.5rem, 12vw, 7.5rem);
+            margin: 0;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            color: var(--white);
+        }
+        .hero-role {
+            font-family: var(--mono);
+            font-size: clamp(1rem, 2.2vw, 1.4rem);
+            color: var(--gray-2);
+            margin: 20px 0 0;
+            min-height: 1.6em;
+        }
+        .hero-role .cursor {
+            display: inline-block;
+            color: var(--white);
+            animation: blink 0.9s steps(1) infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            margin-top: 44px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            padding: 12px 28px;
+            border: 1px solid var(--gray-1);
+            letter-spacing: 0.03em;
+            background: none;
+            color: var(--gray-1);
+            transition: background 0.2s ease, color 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: var(--white);
+            color: var(--bg);
+            opacity: 1;
+        }
+        .btn-ghost {
+            border-color: var(--line);
+            color: var(--gray-2);
+        }
+        .btn-ghost:hover {
+            border-color: var(--white);
+            color: var(--white);
+            background: transparent;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .cursor { animation: none; }
+        }
+        @media (max-width: 600px) {
+            .hero-inner {
+                padding: 0 20px;
+            }
+            .hero-name {
+                font-size: clamp(2.8rem, 10vw, 4.5rem);
+            }
+            .hero-cta {
+                gap: 12px;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.78rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader" aria-hidden="true">
+        <span class="preloader-mark">ADHISH JS</span>
+        <div class="preloader-bar"></div>
+        <span class="preloader-status">loading</span>
+    </div>
+
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <!-- NAV -->
+    <header class="nav">
+        <div class="nav-inner">
+            <span class="nav-name">ADHISH JS</span>
+            <nav class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="experience.html">Experience</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-inner">
+                <h1 class="hero-name">Adhish JS</h1>
+                <p class="hero-role">
+                    <span class="typed-text"></span><span class="cursor">_</span>
+                </p>
+                <div class="hero-cta">
+                    <a class="btn" href="projects.html">View Projects</a>
+                    <a class="btn btn-ghost" href="contact.html">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Built &amp; deployed on GitHub Pages.</p>
+    </footer>
+
+    <script>
+        // ── HIDE PRELOADER ──
+        (function hidePreloader() {
+            const finish = () => document.body.classList.add('is-loaded');
+            // On load
+            window.addEventListener('load', finish);
+            // Fallback: if load takes too long, hide after 1.2s
+            setTimeout(finish, 1200);
+        })();
+
+        // ── TYPEWRITER ──
+        document.addEventListener('DOMContentLoaded', function() {
+            const typedEl = document.querySelector('.typed-text');
+            if (!typedEl) return;
+
+            const roles = [
+                'Analog & Mixed-Signal IC Designer',
+                'ASIC Tapeout Engineer',
+                '20nm FinFET Circuit Designer',
+                'Neuromorphic Chip Architect'
+            ];
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (reduceMotion) {
+                typedEl.textContent = roles[0];
+                return;
+            }
+
+            let roleIndex = 0, charIndex = 0, deleting = false;
+
+            const tick = () => {
+                const current = roles[roleIndex];
+                if (!deleting) {
+                    charIndex++;
+                    typedEl.textContent = current.slice(0, charIndex);
+                    if (charIndex === current.length) {
+                        deleting = true;
+                        setTimeout(tick, 1800);
+                        return;
+                    }
+                } else {
+                    charIndex--;
+                    typedEl.textContent = current.slice(0, charIndex);
+                    if (charIndex === 0) {
+                        deleting = false;
+                        roleIndex = (roleIndex + 1) % roles.length;
+                    }
+                }
+                setTimeout(tick, deleting ? 30 : 55);
+            };
+            tick();
+        });
+    </script>
+</body>
+</html>
