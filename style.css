@@ -216,6 +216,18 @@ main, header, footer{position:relative;z-index:1;}
   border:1px solid var(--line);
   padding:20px;
 }
+.stat-wide{grid-column:1 / -1;}
+
+.stat-link{padding:0;}
+.stat-link a{
+  display:block;
+  padding:20px;
+  height:100%;
+}
+.stat-link:hover{
+  border-color:var(--gray-2);
+}
+.stat-link a:hover{opacity:1;}
 .stat dt{
   font-family:var(--mono);
   font-size:0.72rem;

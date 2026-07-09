@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ONGC — Adhish JS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+        .detail-meta {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            color: var(--gray-2);
+            margin: 0 0 20px;
+        }
+
+        /* ── Project KPIs ── */
+        .project-kpis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin: 16px 0 20px;
+        }
+        .project-kpis .kpi {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            padding: 14px 16px;
+            border-radius: 6px;
+        }
+        .project-kpis .kpi dt {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--gray-2);
+            margin-bottom: 4px;
+        }
+        .project-kpis .kpi dd {
+            margin: 0;
+            color: var(--white);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* ── Download bar ── */
+        .download-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 16px 22px;
+            margin-bottom: 28px;
+            align-items: center;
+        }
+        .download-bar .label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 4px;
+        }
+        .download-bar .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--bg);
+            background: var(--white);
+            border: 1px solid var(--white);
+            border-radius: 6px;
+            transition: opacity 0.2s, transform 0.15s;
+            text-decoration: none;
+        }
+        .download-bar .btn-download:hover {
+            opacity: 0.85;
+            transform: scale(1.01);
+        }
+        .download-bar .btn-download svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+        .download-bar .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none;
+        }
+        .download-bar .btn-ghost:hover {
+            border-color: var(--white);
+            color: var(--white);
+        }
+        .download-bar .btn-ghost svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* ── Text-only content blocks ── */
+        .content-block {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            padding: 20px 24px;
+            border-radius: 8px;
+        }
+        .content-block h3 {
+            font-family: var(--mono);
+            font-size: 1rem;
+            color: var(--white);
+            margin: 0 0 10px;
+        }
+        .content-block p {
+            color: var(--gray-1);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 0 0 12px;
+        }
+        .content-block ul {
+            margin: 0 0 4px;
+            padding-left: 20px;
+        }
+        .content-block li {
+            color: var(--gray-1);
+            font-size: 0.93rem;
+            margin-bottom: 6px;
+        }
+
+        /* ── Spec grid ── */
+        .spec-grid {
+            border: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+        .spec-item {
+            border-bottom: 1px solid var(--line);
+            padding: 12px 14px;
+        }
+        .spec-item:nth-child(odd) {
+            border-right: 1px solid var(--line);
+        }
+        .spec-item:nth-last-child(-n + 2) {
+            border-bottom: none;
+        }
+        .spec-item .label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            color: var(--gray-2);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .spec-item .value {
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        /* ── Feature cards ── */
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+        .preview-card {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            padding: 18px;
+            border-radius: 8px;
+        }
+        .preview-card h3 {
+            margin: 0 0 8px;
+            font-family: var(--mono);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+        .preview-card p {
+            margin: 0;
+            color: var(--gray-1);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* ── Gallery ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 8px;
+        }
+        .gallery-grid figure {
+            margin: 0;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            cursor: pointer;
+        }
+        .gallery-grid figure:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+        .gallery-grid figure img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+            background: var(--bg);
+        }
+        .gallery-grid figure figcaption {
+            padding: 8px 12px;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--gray-2);
+            text-align: center;
+            border-top: 1px solid var(--line);
+            letter-spacing: 0.03em;
+        }
+        .gallery-grid figure .placeholder-text {
+            height: 160px;
+            background: var(--panel);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-3);
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+        }
+
+        /* ── Lightbox ── */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.8rem;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 300;
+            transition: opacity 0.2s;
+            line-height: 1;
+            z-index: 10;
+        }
+        .lightbox-close:hover { opacity: 0.6; }
+        .lightbox-prev, .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3.5rem;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            user-select: none;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+        .lightbox-prev:hover, .lightbox-next:hover { opacity: 0.6; }
+        .lightbox-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.4rem 1.5rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            max-width: 80%;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 10;
+        }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            z-index: 5;
+        }
+
+        /* ── Doc previews ── */
+        .doc-preview {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            margin-top: 14px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .doc-preview iframe {
+            width: 100%;
+            height: 460px;
+            border: none;
+            display: block;
+            background: var(--bg-alt);
+        }
+        .doc-preview-fallback {
+            padding: 14px 18px;
+            border-top: 1px solid var(--line);
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--gray-2);
+            margin: 0;
+        }
+        .doc-preview-fallback a {
+            color: var(--gray-1);
+        }
+
+        .slides-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            margin-top: 14px;
+        }
+        .slides-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (max-width: 760px) {
+            .spec-grid {
+                grid-template-columns: 1fr;
+            }
+            .spec-item:nth-child(odd) {
+                border-right: none;
+            }
+            .spec-item:nth-last-child(-n + 2) {
+                border-bottom: 1px solid var(--line);
+            }
+            .spec-item:last-child {
+                border-bottom: none;
+            }
+            .doc-preview iframe {
+                height: 300px;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .gallery-grid figure img {
+                height: 120px;
+            }
+            .download-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 14px 16px;
+            }
+            .download-bar .label {
+                margin-bottom: 6px;
+            }
+            .lightbox-prev, .lightbox-next { font-size: 2.2rem; }
+            .lightbox-title { font-size: 0.9rem; white-space: normal; }
+            .lightbox-close { font-size: 2.2rem; top: 10px; right: 16px; }
+            .content-block {
+                padding: 16px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="preloader" aria-hidden="true">
+        <span class="preloader-mark">ADHISH JS</span>
+        <div class="preloader-bar"></div>
+        <span class="preloader-status">loading</span>
+    </div>
+
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <header class="nav">
+        <div class="nav-inner">
+            <span class="nav-name">ADHISH JS</span>
+            <nav class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../education.html">Education</a>
+                <a href="../projects.html">Projects</a>
+                <a href="../experience.html" class="active">Experience</a>
+                <a href="../contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <header class="page-header">
+            <div class="section-inner">
+                <a class="back-link" href="../experience.html">&larr; Back to Experience</a>
+                <h1 class="page-title">ONGC, Cauvery Asset</h1>
+                <p class="page-sub">Telecommunication Intern · Jun 2024</p>
+
+                <!-- KPI cards -->
+                <dl class="project-kpis">
+                    <div class="kpi"><dt>Domain</dt><dd>Oil &amp; Gas Telecommunication</dd></div>
+                    <div class="kpi"><dt>Key Technologies</dt><dd>VSAT, GSM, Radio, SCADA</dd></div>
+                    <div class="kpi"><dt>Location</dt><dd>Karaikal, India</dd></div>
+                    <div class="kpi"><dt>Focus</dt><dd>Industrial Communication Systems</dd></div>
+                </dl>
+
+                <!-- ─── DOWNLOAD BAR ─── -->
+                <div class="download-bar">
+                    <span class="label">Downloads</span>
+                    <a class="btn-ghost" href="../assets/experience/ongc/Internship_Report.pdf" target="_blank" rel="noopener">Report PDF</a>
+                    <a class="btn-ghost" href="../assets/experience/ongc/Presentation.pptx" target="_blank" rel="noopener">PPTX</a>
+                    <a class="btn-ghost" href="../assets/experience/ongc/Certificate.pdf" target="_blank" rel="noopener">Certificate</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- ─── OVERVIEW ─── -->
+        <section class="section">
+            <div class="section-inner">
+                <p class="section-label">Overview</p>
+                <div class="content-block">
+                    <h3>Industrial Telecommunication Exposure</h3>
+                    <p>Gained practical exposure to communication technologies such as VSAT, GSM, and SCADA systems at ONGC's Cauvery Asset. Bridged the gap between theoretical knowledge and real-world applications in the oil and gas industry, enhancing skills in monitoring and control technologies essential for industrial processes.</p>
+                    <ul>
+                        <li>Learned about satellite communication (VSAT C-Band), GSM architecture, and Radio (PMP 5G Force 200) systems.</li>
+                        <li>Studied Telephone Exchange (CORAL IP based) and fundamental networking concepts (LAN, WAN, VPN, IP addressing).</li>
+                        <li>Explored SCADA systems used for real-time data acquisition, process control, and industrial automation.</li>
+                        <li>Understood the importance of communication infrastructure in ensuring safety and efficiency in oil &amp; gas operations.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── TECHNOLOGY ARCHITECTURE ─── -->
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Technology Architecture</p>
+                <div class="content-block">
+                    <h3>Communication Systems Overview</h3>
+                    <p>The internship covered the full spectrum of telecommunication systems deployed at ONGC's Cauvery Asset, ranging from satellite and cellular networks to radio and industrial control systems.</p>
+                    <div class="spec-grid">
+                        <div class="spec-item"><span class="label">VSAT</span><span class="value">C-Band Satellite Communication (4/6 GHz)</span></div>
+                        <div class="spec-item"><span class="label">GSM</span><span class="value">2G/3G Cellular Networks with VPN</span></div>
+                        <div class="spec-item"><span class="label">Radio</span><span class="value">PMP 5G Force 200 (Point-to-Point)</span></div>
+                        <div class="spec-item"><span class="label">SCADA</span><span class="value">Supervisory Control &amp; Data Acquisition</span></div>
+                        <div class="spec-item"><span class="label">Exchange</span><span class="value">CORAL IP PBX System</span></div>
+                        <div class="spec-item"><span class="label">Networking</span><span class="value">LAN, WAN, VPN, IP Addressing</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── KEY LEARNINGS ─── -->
+        <section class="section">
+            <div class="section-inner">
+                <p class="section-label">Key Learnings</p>
+                <div class="preview-grid">
+                    <div class="preview-card">
+                        <h3>VSAT Communication</h3>
+                        <p>Understood the configuration of VSAT (ODU &amp; IDU), signal attenuation factors, and the use of C-Band (4 GHz downlink / 6 GHz uplink) in ONGC's star topology network with hub at Delhi.</p>
+                    </div>
+                    <div class="preview-card">
+                        <h3>GSM &amp; Radio</h3>
+                        <p>Studied GSM architecture (MS, BSS, NSS, OSS), routers, and the deployment of PMP 5G Force 200 for reliable point-to-point wireless broadband connectivity.</p>
+                    </div>
+                    <div class="preview-card">
+                        <h3>SCADA Systems</h3>
+                        <p>Monitored real-time data acquisition and process control, learning about communication protocols like HART, MODBUS, and Foundation Fieldbus used in industrial automation.</p>
+                    </div>
+                    <div class="preview-card">
+                        <h3>Telephony &amp; Networking</h3>
+                        <p>Gained hands-on experience with CORAL IP based exchange, Krone modules, and fundamental networking concepts including IP addressing (IPv4 classes), subnetting, and pinging.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── GALLERY ─── -->
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Screenshots</p>
+                <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:12px;">
+                    Click any image to expand. Add your photos to <code>assets/experience/ongc/screenshots/</code>.
+                </p>
+                <div class="gallery-grid" id="galleryContainer">
+                    <!-- VSAT Antenna -->
+                    <figure>
+                        <img class="gallery-img" src="../assets/experience/ongc/screenshots/vsat_antenna.jpg" alt="VSAT Antenna" data-title="VSAT Antenna — C-Band Satellite Communication" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-text').style.display='flex'" />
+                        <figcaption>VSAT Antenna</figcaption>
+                        <div class="placeholder-text">Add screenshot: <code>vsat_antenna.jpg</code></div>
+                    </figure>
+                    <!-- GSM Router -->
+                    <figure>
+                        <img class="gallery-img" src="../assets/experience/ongc/screenshots/gsm_router.jpg" alt="GSM Router" data-title="N-100 Indoor Cluster Modem — GSM Router" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-text').style.display='flex'" />
+                        <figcaption>GSM Router</figcaption>
+                        <div class="placeholder-text">Add screenshot: <code>gsm_router.jpg</code></div>
+                    </figure>
+                    <!-- Radio Antenna -->
+                    <figure>
+                        <img class="gallery-img" src="../assets/experience/ongc/screenshots/radio_antenna.jpg" alt="Radio Antenna" data-title="PMP 5G Force 200 — Radio Communication" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-text').style.display='flex'" />
+                        <figcaption>Radio Antenna</figcaption>
+                        <div class="placeholder-text">Add screenshot: <code>radio_antenna.jpg</code></div>
+                    </figure>
+                    <!-- SCADA Interface -->
+                    <figure>
+                        <img class="gallery-img" src="../assets/experience/ongc/screenshots/scada_interface.jpg" alt="SCADA Interface" data-title="SCADA System — SCADAVANTAGE Explorer" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-text').style.display='flex'" />
+                        <figcaption>SCADA Interface</figcaption>
+                        <div class="placeholder-text">Add screenshot: <code>scada_interface.jpg</code></div>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── DOCUMENT PREVIEWS ─── -->
+        <section class="section">
+            <div class="section-inner">
+                <p class="section-label">Documents</p>
+
+                <!-- Report Preview -->
+                <div style="margin-bottom:24px;">
+                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📄 Internship Report</p>
+                    <div class="doc-preview">
+                        <iframe src="../assets/experience/ongc/report.pdf" title="ONGC Internship Report preview" loading="lazy"></iframe>
+                        <p class="doc-preview-fallback">
+                            <a href="../assets/experience/ongc/report.pdf" target="_blank" rel="noopener">📄 Download Report PDF ↗</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- PPT Preview -->
+                <div style="margin-bottom:24px;">
+                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📊 Presentation — Telecommunication</p>
+                    <div class="slides-container">
+                        <iframe src="https://docs.google.com/gviewer?url=https://drive.google.com/uc?id=YOUR_FILE_ID&embedded=true" 
+                                title="ONGC Telecommunication Presentation" 
+                                loading="lazy">
+                        </iframe>
+                    </div>
+                    <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gray-3); margin-top:6px;">
+                        ⚡ To preview the PPTX, upload it to Google Drive, get a shareable link, extract the file ID, and replace <code>YOUR_FILE_ID</code> in the iframe <code>src</code> above. Or 
+                        <a href="../assets/experience/ongc/presentation.pptx" target="_blank" rel="noopener" style="color:var(--gray-1); text-decoration:underline;">download PPTX directly ↗</a>
+                    </p>
+                </div>
+
+                <!-- Certificate Preview -->
+                <div>
+                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📄 Certificate</p>
+                    <div class="doc-preview">
+                        <iframe src="../assets/experience/ongc/certificate.pdf" title="ONGC Certificate preview" loading="lazy"></iframe>
+                        <p class="doc-preview-fallback">
+                            <a href="../assets/experience/ongc/certificate.pdf" target="_blank" rel="noopener">📄 Download Certificate PDF ↗</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>Built &amp; deployed on GitHub Pages.</p>
+    </footer>
+
+    <!-- ─── LIGHTBOX ─── -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <span class="lightbox-prev" id="lightboxPrev">&#10094;</span>
+        <span class="lightbox-next" id="lightboxNext">&#10095;</span>
+        <div class="lightbox-title" id="lightboxTitle">Title</div>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="Expanded view" />
+    </div>
+
+    <script src="../script.js"></script>
+    <script>
+        // ── Lightbox logic ──
+        (function() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxTitle = document.getElementById('lightboxTitle');
+            const closeBtn = document.getElementById('lightboxClose');
+            const prevBtn = document.getElementById('lightboxPrev');
+            const nextBtn = document.getElementById('lightboxNext');
+
+            const galleryContainer = document.getElementById('galleryContainer');
+            const images = galleryContainer.querySelectorAll('.gallery-img');
+            let currentIndex = 0;
+
+            function openLightbox(index) {
+                if (index < 0) index = images.length - 1;
+                if (index >= images.length) index = 0;
+                currentIndex = index;
+                const img = images[currentIndex];
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxTitle.textContent = img.dataset.title || img.alt || 'Image';
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function prevImage() {
+                openLightbox(currentIndex - 1);
+            }
+
+            function nextImage() {
+                openLightbox(currentIndex + 1);
+            }
+
+            images.forEach((img, idx) => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openLightbox(idx);
+                });
+            });
+
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', prevImage);
+            nextBtn.addEventListener('click', nextImage);
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevImage();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextImage();
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>

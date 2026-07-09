@@ -9,14 +9,346 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css" />
     <style>
-        .detail-meta { font-family: var(--mono); font-size: 0.85rem; color: var(--gray-2); margin: 0 0 20px; }
-        .detail-desc { color: var(--gray-1); font-size: 1rem; margin: 0 0 20px; line-height: 1.7; }
-        .detail-list { margin: 0 0 20px; padding-left: 20px; }
-        .detail-list li { color: var(--gray-1); font-size: 0.95rem; margin-bottom: 8px; }
-        .links-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
-        .links-row a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; height: 40px; font-family: var(--mono); font-size: 0.72rem; border: 1px solid var(--line); color: var(--gray-2); border-radius: 4px; transition: border-color 0.2s, color 0.2s; text-decoration: none; }
-        .links-row a:hover { border-color: var(--white); color: var(--white); }
-        .links-row a svg { width: 14px; height: 14px; fill: currentColor; }
+        .detail-meta {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            color: var(--gray-2);
+            margin: 0 0 20px;
+        }
+
+        /* ── Project KPIs ── */
+        .project-kpis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin: 16px 0 20px;
+        }
+        .project-kpis .kpi {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            padding: 14px 16px;
+            border-radius: 6px;
+        }
+        .project-kpis .kpi dt {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--gray-2);
+            margin-bottom: 4px;
+        }
+        .project-kpis .kpi dd {
+            margin: 0;
+            color: var(--white);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* ── Download bar ── */
+        .download-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 16px 22px;
+            margin-bottom: 28px;
+            align-items: center;
+        }
+        .download-bar .label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 4px;
+        }
+        .download-bar .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none;
+        }
+        .download-bar .btn-ghost:hover {
+            border-color: var(--white);
+            color: var(--white);
+        }
+        .download-bar .btn-ghost svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* ── Text-only content blocks ── */
+        .content-block {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            padding: 20px 24px;
+            border-radius: 8px;
+        }
+        .content-block h3 {
+            font-family: var(--mono);
+            font-size: 1rem;
+            color: var(--white);
+            margin: 0 0 10px;
+        }
+        .content-block p {
+            color: var(--gray-1);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 0 0 12px;
+        }
+        .content-block ul {
+            margin: 0 0 4px;
+            padding-left: 20px;
+        }
+        .content-block li {
+            color: var(--gray-1);
+            font-size: 0.93rem;
+            margin-bottom: 6px;
+        }
+
+        /* ── Spec grid ── */
+        .spec-grid {
+            border: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+        .spec-item {
+            border-bottom: 1px solid var(--line);
+            padding: 12px 14px;
+        }
+        .spec-item:nth-child(odd) {
+            border-right: 1px solid var(--line);
+        }
+        .spec-item:nth-last-child(-n + 2) {
+            border-bottom: none;
+        }
+        .spec-item .label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            color: var(--gray-2);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .spec-item .value {
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        /* ── Feature cards ── */
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+        .preview-card {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            padding: 18px;
+            border-radius: 8px;
+        }
+        .preview-card h3 {
+            margin: 0 0 8px;
+            font-family: var(--mono);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+        .preview-card p {
+            margin: 0;
+            color: var(--gray-1);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* ── Gallery ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 8px;
+        }
+        .gallery-grid figure {
+            margin: 0;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            cursor: pointer;
+        }
+        .gallery-grid figure:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+        .gallery-grid figure img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+            background: var(--bg);
+        }
+        .gallery-grid figure figcaption {
+            padding: 8px 12px;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--gray-2);
+            text-align: center;
+            border-top: 1px solid var(--line);
+            letter-spacing: 0.03em;
+        }
+
+        /* ── Lightbox ── */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.8rem;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 300;
+            transition: opacity 0.2s;
+            line-height: 1;
+            z-index: 10;
+        }
+        .lightbox-close:hover { opacity: 0.6; }
+        .lightbox-prev, .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3.5rem;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            user-select: none;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+        .lightbox-prev:hover, .lightbox-next:hover { opacity: 0.6; }
+        .lightbox-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.4rem 1.5rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            max-width: 80%;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 10;
+        }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            z-index: 5;
+        }
+
+        /* ── Doc previews ── */
+        .doc-preview {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            margin-top: 14px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .doc-preview iframe {
+            width: 100%;
+            height: 460px;
+            border: none;
+            display: block;
+            background: var(--bg-alt);
+        }
+        .doc-preview-fallback {
+            padding: 14px 18px;
+            border-top: 1px solid var(--line);
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--gray-2);
+            margin: 0;
+        }
+        .doc-preview-fallback a {
+            color: var(--gray-1);
+        }
+
+        @media (max-width: 760px) {
+            .spec-grid {
+                grid-template-columns: 1fr;
+            }
+            .spec-item:nth-child(odd) {
+                border-right: none;
+            }
+            .spec-item:nth-last-child(-n + 2) {
+                border-bottom: 1px solid var(--line);
+            }
+            .spec-item:last-child {
+                border-bottom: none;
+            }
+            .doc-preview iframe {
+                height: 300px;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .gallery-grid figure img {
+                height: 120px;
+            }
+            .download-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 14px 16px;
+            }
+            .download-bar .label {
+                margin-bottom: 6px;
+            }
+            .lightbox-prev, .lightbox-next { font-size: 2.2rem; }
+            .lightbox-title { font-size: 0.9rem; white-space: normal; }
+            .lightbox-close { font-size: 2.2rem; top: 10px; right: 16px; }
+            .content-block {
+                padding: 16px 18px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -47,37 +379,163 @@
 
         <header class="page-header">
             <div class="section-inner">
-                <a class="back-link" href="../experience.html">← Back to Experience</a>
+                <a class="back-link" href="../experience.html">&larr; Back to Experience</a>
                 <h1 class="page-title">India Semiconductor Workforce Development Program</h1>
                 <p class="page-sub">Trainee · Feb 2025 – May 2025</p>
+
+                <!-- KPI cards -->
+                <dl class="project-kpis">
+                    <div class="kpi"><dt>Organizers</dt><dd>IISc · Synopsys · Samsung</dd></div>
+                    <div class="kpi"><dt>Cohort</dt><dd>4</dd></div>
+                    <div class="kpi"><dt>Levels Completed</dt><dd>1 · 2 · Advanced</dd></div>
+                    <div class="kpi"><dt>Recognition</dt><dd>Top Performer · Samsung Fellow</dd></div>
+                </dl>
+
+                <!-- ─── DOWNLOAD BAR ─── -->
+                <div class="download-bar">
+                    <span class="label">Downloads</span>
+                    <a class="btn-ghost" href="../assets/experience/iswdp/ISWDP-Cohort-4-Level-1-Completion-adhishjs05@gmail.com.pdf" target="_blank" rel="noopener">Level 1</a>
+                    <a class="btn-ghost" href="../assets/experience/iswdp/ISWDP-Cohort-4-Level-2-Completion-adhishjs05@gmail.com.pdf" target="_blank" rel="noopener">Level 2</a>
+                    <a class="btn-ghost" href="../assets/experience/iswdp/cohort_4_advanced_level_completionadhishjs05@gmail.com.pdf" target="_blank" rel="noopener">Advanced</a>
+                    <a class="btn-ghost" href="../assets/experience/iswdp/cohort_4_samsung_fellowshipadhishjs05@gmail.com.pdf" target="_blank" rel="noopener">Samsung Fellowship</a>
+                </div>
             </div>
         </header>
 
+        <!-- ─── OVERVIEW ─── -->
         <section class="section">
             <div class="section-inner">
                 <p class="section-label">Overview</p>
-                <p class="detail-desc">
-                    Received intensive training in semiconductor device physics, CMOS design, and VLSI
-                    architecture through hands-on simulations using the Synopsys Sentaurus TCAD suite.
+                <div class="content-block">
+                    <h3>Semiconductor Workforce Development</h3>
+                    <p>
+                        The <strong>India Semiconductor Workforce Development Program (ISWDP)</strong> is a comprehensive initiative tailored to bridge the process technology and device design skill gap in the rapidly expanding semiconductor sector[reference:0]. It is a collaboration between the <strong>Indian Institute of Science (IISc)</strong>, <strong>Samsung Semiconductor India Research (SSIR)</strong>, and <strong>Synopsys Inc</strong>[reference:1].
+                    </p>
+                    <p>
+                        As a trainee in <strong>Cohort 4</strong>, I completed all three levels of the program — Level 1, Level 2, and Advanced — gaining hands-on experience in semiconductor device physics, TCAD simulations, and VLSI design flows. I was recognized as a <strong>Top Performer</strong> in both Level 2 and the Advanced level, and received the <strong>Samsung Fellowship</strong>.
+                    </p>
+                    <ul>
+                        <li>Performed semiconductor process and device simulations using the Synopsys Sentaurus TCAD suite for CMOS process and device modeling.</li>
+                        <li>Received hands-on training in semiconductor device physics, CMOS design, fabrication processes, and VLSI architecture.</li>
+                        <li>Progressed through three levels of increasing complexity, from fundamentals to advanced device characterization.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── CURRICULUM STRUCTURE ─── -->
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Curriculum Structure</p>
+                <div class="content-block">
+                    <h3>Three-Level Progression</h3>
+                    <p>The program is structured in three levels, each building on the previous one to develop a comprehensive understanding of semiconductor device design and TCAD simulation[reference:2].</p>
+                    <div class="spec-grid">
+                        <div class="spec-item"><span class="label">Level 1</span><span class="value">Text Books to TCAD — Semiconductor physics fundamentals, basic device structures, and doping profiles</span></div>
+                        <div class="spec-item"><span class="label">Level 2</span><span class="value">Advanced TCAD — Process and device simulation, CMOS modeling, and characterization</span></div>
+                        <div class="spec-item"><span class="label">Advanced Level</span><span class="value">Precision characterization techniques, RF testing, and emerging technology evaluation</span></div>
+                        <div class="spec-item"><span class="label">Tools Used</span><span class="value">Synopsys Sentaurus TCAD · Structure Editor · Sentaurus Visual · Workbench</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── KEY LEARNINGS ─── -->
+        <section class="section">
+            <div class="section-inner">
+                <p class="section-label">Key Learnings</p>
+                <div class="preview-grid">
+                    <div class="preview-card">
+                        <h3>Semiconductor Device Physics</h3>
+                        <p>Gained a deep understanding of semiconductor physics, including carrier transport, doping, junction behavior, and the fundamental principles underlying modern CMOS devices.</p>
+                    </div>
+                    <div class="preview-card">
+                        <h3>TCAD Process &amp; Device Simulation</h3>
+                        <p>Learned to use Synopsys Sentaurus TCAD for process and device simulation — from creating basic structures to modeling complex CMOS devices with accurate doping profiles.</p>
+                    </div>
+                    <div class="preview-card">
+                        <h3>VLSI Design &amp; Fabrication</h3>
+                        <p>Received comprehensive training in CMOS design, fabrication processes, and VLSI architecture, bridging the gap between theoretical knowledge and practical semiconductor manufacturing.</p>
+                    </div>
+                    <div class="preview-card">
+                        <h3>Characterization &amp; Testing</h3>
+                        <p>Explored precision characterization techniques, measurement methodologies, and RF testing essential for evaluating and qualifying semiconductor materials and devices.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── GALLERY ─── -->
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Achievements</p>
+                <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:12px;">
+                    Click any image to expand.
                 </p>
-                <ul class="detail-list">
-                    <li>Performed semiconductor process and device simulations using the Synopsys Sentaurus TCAD suite for CMOS process and device modeling.</li>
-                    <li>Received hands-on training in semiconductor device physics, CMOS design, fabrication processes, and VLSI architecture.</li>
-                </ul>
+                <div class="gallery-grid" id="galleryContainer">
+                    <figure>
+                        <img class="gallery-img" src="../assets/experience/iswdp/top_performer_level_2.jpg" alt="Top Performer Level 2" data-title="Top Performer — Level 2" />
+                        <figcaption>Top Performer — Level 2</figcaption>
+                    </figure>
+                    <figure>
+                        <img class="gallery-img" src="../assets/experience/iswdp/top_performer_level_advance.jpg" alt="Top Performer Advanced Level" data-title="Top Performer — Advanced Level" />
+                        <figcaption>Top Performer — Advanced Level</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
 
-                <p class="section-label" style="margin-top:32px;">Skills</p>
-                <div class="card-skills">
-                    <span class="tag-pill">Sentaurus TCAD</span>
-                    <span class="tag-pill">CMOS Process Modeling</span>
-                    <span class="tag-pill">Device Physics</span>
+        <!-- ─── DOCUMENT PREVIEWS ─── -->
+        <section class="section">
+            <div class="section-inner">
+                <p class="section-label">Certificates</p>
+
+                <!-- Samsung Fellowship -->
+
+                <div>
+                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📄 Samsung Fellowship</p>
+                    <div class="doc-preview">
+                        <iframe src="../assets/experience/iswdp/samsung_cer.pdf" title="Samsung Fellowship Certificate" loading="lazy"></iframe>
+                        <p class="doc-preview-fallback">
+                            <a href="../assets/experience/iswdp/samsung_cer.pdf" target="_blank" rel="noopener">📄 Download Samsung Fellowship Certificate ↗</a>
+                        </p>
+                    </div>
                 </div>
 
-                <div class="links-row">
-                    <a href="https://github.com/adhishjs" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                        GitHub
-                    </a>
+                <!-- Level 1 -->
+                <div style="margin-bottom:24px;">
+                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📄 Level 1 — Completion</p>
+                    <div class="doc-preview">
+                        <iframe src="../assets/experience/iswdp/lvl_1.pdf" title="ISWDP Level 1 Certificate" loading="lazy"></iframe>
+                        <p class="doc-preview-fallback">
+                            <a href="../assets/experience/iswdp/lvl_1.pdf" target="_blank" rel="noopener">📄 Download Level 1 Certificate ↗</a>
+                        </p>
+                    </div>
                 </div>
+
+                <!-- Level 2 -->
+                <div style="margin-bottom:24px;">
+                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📄 Level 2 — Completion</p>
+                    <div class="doc-preview">
+                        <iframe src="../assets/experience/iswdp/lvl_2.pdf" title="ISWDP Level 2 Certificate" loading="lazy"></iframe>
+                        <p class="doc-preview-fallback">
+                            <a href="../assets/experience/iswdp/lvl_2.pdf" target="_blank" rel="noopener">📄 Download Level 2 Certificate ↗</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Advanced Level -->
+                <div style="margin-bottom:24px;">
+                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📄 Advanced Level — Completion</p>
+                    <div class="doc-preview">
+                        <iframe src="../assets/experience/iswdp/lvl_adv.pdf" title="ISWDP Advanced Level Certificate" loading="lazy"></iframe>
+                        <p class="doc-preview-fallback">
+                            <a href="../assets/experience/iswdp/lvl_adv.pdf" target="_blank" rel="noopener">📄 Download Advanced Level Certificate ↗</a>
+                        </p>
+                    </div>
+                </div>
+
+
             </div>
         </section>
 
@@ -87,6 +545,86 @@
         <p>Built &amp; deployed on GitHub Pages.</p>
     </footer>
 
+    <!-- ─── LIGHTBOX ─── -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <span class="lightbox-prev" id="lightboxPrev">&#10094;</span>
+        <span class="lightbox-next" id="lightboxNext">&#10095;</span>
+        <div class="lightbox-title" id="lightboxTitle">Title</div>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="Expanded view" />
+    </div>
+
     <script src="../script.js"></script>
+    <script>
+        // ── Lightbox logic ──
+        (function() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxTitle = document.getElementById('lightboxTitle');
+            const closeBtn = document.getElementById('lightboxClose');
+            const prevBtn = document.getElementById('lightboxPrev');
+            const nextBtn = document.getElementById('lightboxNext');
+
+            const galleryContainer = document.getElementById('galleryContainer');
+            const images = galleryContainer.querySelectorAll('.gallery-img');
+            let currentIndex = 0;
+
+            function openLightbox(index) {
+                if (index < 0) index = images.length - 1;
+                if (index >= images.length) index = 0;
+                currentIndex = index;
+                const img = images[currentIndex];
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxTitle.textContent = img.dataset.title || img.alt || 'Image';
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function prevImage() {
+                openLightbox(currentIndex - 1);
+            }
+
+            function nextImage() {
+                openLightbox(currentIndex + 1);
+            }
+
+            images.forEach((img, idx) => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openLightbox(idx);
+                });
+            });
+
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', prevImage);
+            nextBtn.addEventListener('click', nextImage);
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevImage();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextImage();
+                }
+            });
+        })();
+    </script>
+
 </body>
 </html>

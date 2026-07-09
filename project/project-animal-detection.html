@@ -8,6 +8,310 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
+<style>
+    .project-meta-box{
+    margin:14px 0 0;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .project-meta-row{
+    display:grid;
+    grid-template-columns:170px 1fr;
+    border-bottom:1px solid var(--line);
+  }
+  .project-meta-row:last-child{border-bottom:none;}
+  .project-meta-label,
+  .project-meta-value{
+    padding:10px 14px;
+    font-family:var(--mono);
+    font-size:0.74rem;
+    letter-spacing:0.02em;
+  }
+  .project-meta-label{
+    color:var(--gray-2);
+    border-right:1px solid var(--line);
+    text-transform:uppercase;
+  }
+  .project-meta-value{color:var(--gray-1);}
+  .project-meta-value a{
+    color:var(--gray-1);
+    text-decoration:underline;
+    text-underline-offset:2px;
+  }
+  .project-meta-value a:hover{color:var(--white);}
+
+  .project-kpis{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:12px;
+    margin-top:20px;
+  }
+  .project-kpis .kpi{
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:14px 16px;
+  }
+  .project-kpis .kpi dt{
+    font-family:var(--mono);
+    font-size:0.68rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--gray-2);
+    margin-bottom:6px;
+  }
+  .project-kpis .kpi dd{
+    margin:0;
+    color:var(--white);
+    font-size:1rem;
+    font-weight:600;
+  }
+
+  .spec-grid{
+    border:1px solid var(--line);
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+  .spec-item{
+    border-bottom:1px solid var(--line);
+    padding:14px 16px;
+  }
+  .spec-item:nth-child(odd){border-right:1px solid var(--line);}
+  .spec-item:nth-last-child(-n + 2){border-bottom:none;}
+  .spec-item .label{
+    display:block;
+    font-family:var(--mono);
+    font-size:0.68rem;
+    color:var(--gray-2);
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+  .spec-item .value{color:var(--white);font-size:0.95rem;}
+
+  .process-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:12px;
+  }
+  .process-card{
+    border:1px solid var(--line);
+    background:var(--bg-alt);
+    padding:16px;
+  }
+  .process-card .step{
+    font-family:var(--mono);
+    font-size:0.68rem;
+    color:var(--gray-2);
+    letter-spacing:0.05em;
+    margin:0 0 8px;
+  }
+  .process-card h3{margin:0 0 6px;font-family:var(--mono);font-size:0.92rem;color:var(--white);}
+  .process-card p{margin:0;color:var(--gray-1);font-size:0.92rem;}
+
+  .report-flow{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .report-item{
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:12px;
+    display:grid;
+    grid-template-columns:minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap:14px;
+    align-items:center;
+    min-width:0;
+    overflow:hidden;
+  }
+  .report-item--reverse{
+    grid-template-columns:minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+  .report-item--reverse .report-media{order:2;}
+  .report-item--reverse .report-copy{order:1;}
+  .report-media{min-width:0;}
+  .report-media img{
+    width:100%;
+    height:auto;
+    max-height:300px;
+    object-fit:contain;
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    display:block;
+  }
+  .report-copy{min-width:0;}
+  .report-copy h3{
+    margin:0 0 8px;
+    font-family:var(--mono);
+    font-size:0.95rem;
+    color:var(--white);
+  }
+  .report-copy p{
+    margin:0 0 10px;
+    color:var(--gray-1);
+    font-size:0.94rem;
+    line-height:1.7;
+    overflow-wrap:anywhere;
+  }
+  .report-copy p:last-child{margin-bottom:0;}
+  .report-copy ul{
+    margin:10px 0 0;
+    padding-left:18px;
+  }
+  .report-copy li{
+    color:var(--gray-1);
+    margin-bottom:6px;
+    font-size:0.92rem;
+  }
+
+  .result-grid,
+  .figure-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
+    gap:14px;
+  }
+  .figure-card,
+  .result-card{
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:10px;
+    display:grid;
+    grid-template-columns:minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap:12px;
+    align-items:center;
+    min-width:0;
+    overflow:hidden;
+  }
+  .figure-card img,
+  .result-card img{
+    width:100%;
+    height:auto;
+    max-height:240px;
+    object-fit:contain;
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    cursor:pointer;
+    min-width:0;
+  }
+  .figure-card p,
+  .result-card p{
+    margin:0;
+    font-family:var(--mono);
+    font-size:0.74rem;
+    color:var(--gray-2);
+    line-height:1.55;
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+
+  .doc-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0;
+  }
+  .doc-actions a{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:var(--mono);
+    font-size:0.75rem;
+    color:var(--gray-1);
+    border:1px solid var(--line);
+    padding:10px 14px;
+  }
+  .doc-actions a:hover{border-color:var(--white);color:var(--white);opacity:1;}
+
+  .doc-preview{
+    border:1px solid var(--line);
+    background:var(--panel);
+    margin-top:14px;
+  }
+  .doc-preview iframe{
+    width:100%;
+    height:460px;
+    border:none;
+    display:block;
+    background:var(--bg-alt);
+  }
+  .doc-preview-fallback{
+    padding:14px 18px;
+    border-top:1px solid var(--line);
+    font-family:var(--mono);
+    font-size:0.75rem;
+    color:var(--gray-2);
+    margin:0;
+  }
+  .doc-preview-fallback a{color:var(--gray-1);}
+  .doc-preview-fallback a:hover{color:var(--white);}
+
+  .lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    background:rgba(0,0,0,0.9);
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .lightbox.active{display:flex;}
+  .lightbox img{
+    max-width:92vw;
+    max-height:84vh;
+    border:1px solid var(--line);
+  }
+  .lightbox button{
+    position:absolute;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--white);
+    font-family:var(--mono);
+    width:34px;
+    height:34px;
+    cursor:pointer;
+  }
+  .lightbox .lightbox-close{top:16px;right:16px;}
+  .lightbox .lightbox-prev,
+  .lightbox .lightbox-next{
+    top:50%;
+    transform:translateY(-50%);
+    width:42px;
+    height:42px;
+    font-size:1.2rem;
+    line-height:1;
+  }
+  .lightbox .lightbox-prev{left:16px;}
+  .lightbox .lightbox-next{right:16px;}
+
+  @media (max-width:760px){
+    .report-item,
+    .report-item--reverse{
+      grid-template-columns:1fr;
+    }
+    .report-item--reverse .report-media,
+    .report-item--reverse .report-copy{
+      order:initial;
+    }
+    .result-grid,
+    .figure-grid{grid-template-columns:1fr;}
+    .spec-grid{grid-template-columns:1fr;}
+    .spec-item:nth-child(odd){border-right:none;}
+    .spec-item:nth-last-child(-n + 2){border-bottom:1px solid var(--line);}
+    .spec-item:last-child{border-bottom:none;}
+    .figure-card,
+    .result-card{
+      grid-template-columns:1fr;
+    }
+    .lightbox .lightbox-prev,
+    .lightbox .lightbox-next{
+      width:36px;
+      height:36px;
+      font-size:1rem;
+    }
+    .doc-preview iframe{height:300px;}
+  }
+</style>
 </head>
 <body>
 
@@ -25,6 +329,7 @@
     <nav class="nav-links">
       <a href="../index.html">Home</a>
       <a href="../about.html">About</a>
+      <a href="../education.html">Education</a>
       <a href="../projects.html" class="active">Projects</a>
       <a href="../experience.html">Experience</a>
       <a href="../contact.html">Contact</a>
@@ -33,99 +338,399 @@
 </header>
 
 <main>
-
   <header class="page-header">
     <div class="section-inner">
-      <a class="back-link" href="../projects.html">← Back to Projects</a>
+      <a class="back-link" href="../projects.html">&larr; Back to Projects</a>
       <h1 class="page-title">Real-Time Animal Detection and Alert System</h1>
-      <p class="page-sub">Raspberry Pi 4 · 92% Accuracy · Sep – Nov 2024</p>
+      <p class="page-sub">Sep - Nov 2024</p>
+      <div class="project-meta-box" aria-label="Project metadata">
+        <div class="project-meta-row">
+          <span class="project-meta-label">Category</span>
+          <span class="project-meta-value">Internship Project</span>
+        </div>
+        <div class="project-meta-row">
+          <span class="project-meta-label">Guide</span>
+          <span class="project-meta-value"><a href="https://research.nitpy.ac.in/professor_profile/55/" target="_blank" rel="noopener">Dr. Surendar M</a></span>
+        </div>
+        <div class="project-meta-row">
+          <span class="project-meta-label">Team Members</span>
+          <span class="project-meta-value">N Parvathi, N Balakrishna</span>
+        </div>
     </div>
   </header>
 
-
   <section class="section">
     <div class="section-inner">
-      <p class="section-label">Skills Used</p>
+      <p class="section-label">Tools &amp; Stack</p>
       <div class="card-skills">
         <span class="tag-pill">Python</span>
         <span class="tag-pill">Raspberry Pi</span>
+        <span class="tag-pill">OpenCV</span>
         <span class="tag-pill">CNN (VGG19)</span>
         <span class="tag-pill">IoT</span>
+        <span class="tag-pill">Google Drive</span>
+        <span class="tag-pill">SMSChef API</span>
       </div>
       <div class="card-links">
-        <a class="link-github" href="https://github.com/adhishjs" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+        <a class="link-github" href="https://github.com/adhishjs/Animal-tracker-raspberry-pi" target="_blank" rel="noopener" aria-label="Open GitHub profile">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="section-inner">
       <p class="section-label">Overview</p>
-      <p class="pdetail-desc">Add a longer write-up here: hardware setup, model choice, and how the
-      alert pipeline ties together sensor input, detection, and notification.</p>
-      <ul class="pdetail-list">
-        <li>Built a real-time wildlife monitoring system integrating an ultrasonic sensor,
-        USB camera, and a VGG19-based CNN for automated detection across 32 species.</li>
-        <li>Implemented an end-to-end alert pipeline uploading detected images to Google
-        Drive and sending SMS notifications via the SMSChef API.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="section-inner">
-      <p class="section-label">Preview / Screenshots</p>
-      <div class="pdetail-gallery">
-        <div class="placeholder">Add detection sample photo</div>
-        <div class="placeholder">Add hardware setup photo</div>
-        <div class="placeholder">Add alert notification screenshot</div>
+      <div class="report-flow">
+        <article class="report-item">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/flow_of_project.jpeg" alt="Project workflow diagram" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Project Overview</h3>
+            <p>This project implements a real-time wildlife detection system that combines a Raspberry Pi 4, USB camera, and ultrasonic sensor to detect nearby animals, classify them using a CNN, and notify users immediately with the captured image and a Drive link.</p>
+            <ul>
+              <li>Built a real-time wildlife monitoring system using a Raspberry Pi 4, USB camera, and ultrasonic sensor.</li>
+              <li>Used a VGG19-based CNN to classify animals across 32 species with around 92% accuracy.</li>
+              <li>Uploaded detected images to Google Drive and sent SMS alerts with the Drive link through the SMSChef API.</li>
+            </ul>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="section-inner">
-      <p class="section-label">Code Preview</p>
-      <div class="code-panel">
-        <div class="code-panel-head"><span>python</span><span>placeholder</span></div>
-        <pre><code># If this project has a Python UI (e.g. a live camera feed
-# viewer or an alert-log dashboard), paste the real code here.
-#
-# Send me the .py file and I will drop the actual snippet in,
-# with the filename shown in the header above.
-
-def main():
-    pass
-
-if __name__ == "__main__":
-    main()</code></pre>
+      <p class="section-label">System Workflow</p>
+      <div class="process-grid">
+        <article class="process-card">
+          <p class="step">STEP 01</p>
+          <h3>Sensor Detects Object</h3>
+          <p>The ultrasonic sensor continuously measures distance and triggers when an object enters the detection range.</p>
+        </article>
+        <article class="process-card">
+          <p class="step">STEP 02</p>
+          <h3>Image Captured</h3>
+          <p>The USB camera captures the object image once the trigger condition is met.</p>
+        </article>
+        <article class="process-card">
+          <p class="step">STEP 03</p>
+          <h3>Model Inference</h3>
+          <p>The image is sent to the CNN model for animal detection and classification.</p>
+        </article>
+        <article class="process-card">
+          <p class="step">STEP 04</p>
+          <h3>Drive Upload</h3>
+          <p>Detected images are uploaded to Google Drive and stored for review.</p>
+        </article>
+        <article class="process-card">
+          <p class="step">STEP 05</p>
+          <h3>SMS Alert</h3>
+          <p>The user receives an SMS containing the detection alert and Drive link.</p>
+        </article>
+        <article class="process-card">
+          <p class="step">STEP 06</p>
+          <h3>Loop Continues</h3>
+          <p>The system resumes sensing and keeps watching for the next animal entry.</p>
+        </article>
       </div>
-      <p class="code-note">Placeholder — replace with your actual UI code.</p>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="section-inner">
-      <p class="section-label">Report / PPT Preview</p>
-      <div class="doc-preview">
-        <!-- Add assets/animal-detection/report.pdf and update the src below to preview it inline -->
-        <iframe src="../assets/project/animal-detection/report.pdf" title="Report preview" loading="lazy"></iframe>
-        <p class="doc-preview-fallback">
-          Preview blank? Add your file at <code>../assets/project/animal-detection/report.pdf</code>.
-          For a PPT, once this site is live on GitHub Pages you can embed Google's viewer instead:
-          <code>https://docs.google.com/gviewer?url=YOUR_PPTX_URL&amp;embedded=true</code>.
-          Direct download: <a href="../assets/project/animal-detection/report.pdf" target="_blank" rel="noopener">report.pdf ↗</a>
-        </p>
+      <p class="section-label">Hardware &amp; Architecture</p>
+      <div class="report-flow">
+        <article class="report-item report-item--reverse">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/block_diagram.jpeg" alt="System block diagram" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Hardware Architecture</h3>
+            <p>The hardware architecture centers on a Raspberry Pi 4, a USB camera for image capture, and an ultrasonic sensor to detect object presence and trigger the next stage of the pipeline.</p>
+            <div class="spec-grid">
+              <div class="spec-item"><span class="label">Controller</span><span class="value">Raspberry Pi 4</span></div>
+              <div class="spec-item"><span class="label">Vision Input</span><span class="value">USB camera</span></div>
+              <div class="spec-item"><span class="label">Distance Sensing</span><span class="value">Ultrasonic sensor</span></div>
+              <div class="spec-item"><span class="label">Alert Service</span><span class="value">SMSChef + Google Drive</span></div>
+              <div class="spec-item"><span class="label">Model</span><span class="value">VGG19-based CNN</span></div>
+              <div class="spec-item"><span class="label">Classes</span><span class="value">32 animal species</span></div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-label">Key Figures From Report</p>
+      <div class="report-flow">
+        <article class="report-item">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/model_csnn_vlock_diagram.jpg" alt="Model block diagram" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Model and Detection Logic</h3>
+            <p>The detection image is passed to the classification model and the system decides whether to upload the image and raise an alert. This mirrors the report’s model-side processing flow.</p>
+          </div>
+        </article>
+        <article class="report-item report-item--reverse">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/formula_for_distance.png" alt="Ultrasonic distance formula" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Distance Measurement</h3>
+            <p>The ultrasonic distance formula is used to measure how close an object is, which helps decide when the camera capture and recognition flow should start.</p>
+          </div>
+        </article>
+        <article class="report-item">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/training_validation_graph.jpeg" alt="Training and validation graph" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Training Performance</h3>
+            <p>Training and validation curves were used to evaluate the classifier and check whether the model maintained stable learning behavior.</p>
+          </div>
+        </article>
+        <article class="report-item report-item--reverse">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/data_of_human_death_due_to_tiger.png" alt="Context figure for human-animal conflict" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Why the Project Matters</h3>
+            <p>The report includes the human-animal conflict context to justify the need for early detection and alerting in areas where animals may enter human spaces.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="section-inner">
+      <p class="section-label">Detection Examples</p>
+      <div class="report-flow">
+        <article class="report-item">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/elephant_testimage.jpg" alt="Elephant test image" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Elephant Detection Sample</h3>
+            <p>This example shows a captured elephant image used during testing of the classifier.</p>
+          </div>
+        </article>
+        <article class="report-item report-item--reverse">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/lion_test_image.jpg" alt="Lion test image" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Lion Detection Sample</h3>
+            <p>The lion sample illustrates the model’s ability to classify another species class in the test set.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-label">Hardware Setup &amp; Remote Access</p>
+      <div class="report-flow">
+        <article class="report-item">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/raspberry_pi.jpg" alt="Raspberry Pi setup" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Central Controller</h3>
+            <p>The Raspberry Pi 4 acts as the main controller that coordinates sensing, image capture, model inference, and cloud alerting.</p>
+          </div>
+        </article>
+        <article class="report-item report-item--reverse">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/ultrasonic_sensor.jpg" alt="Ultrasonic sensor" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Distance Sensor</h3>
+            <p>The ultrasonic sensor monitors proximity and initiates the detection flow whenever a nearby object is found.</p>
+          </div>
+        </article>
+        <article class="report-item">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/camera.jpg" alt="USB camera" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Camera Capture</h3>
+            <p>The USB camera captures the animal image and passes it into the classification pipeline for recognition.</p>
+          </div>
+        </article>
+        <article class="report-item report-item--reverse">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/project_setup_1.jpg" alt="Project setup image 1" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Prototype Setup</h3>
+            <p>This setup view from the report shows the deployment arrangement used for testing and debugging the hardware flow.</p>
+          </div>
+        </article>
+        <article class="report-item">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/project_setup_2.jpg" alt="Project setup image 2" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Project Setup View</h3>
+            <p>Another setup image documents the physical integration of the sensing and processing hardware.</p>
+          </div>
+        </article>
+        <article class="report-item report-item--reverse">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/ultrasonic_working.jpg" alt="Ultrasonic sensor working" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Ultrasonic Working Principle</h3>
+            <p>The report’s working diagram explains how the ultrasonic module measures distance to the detected object.</p>
+          </div>
+        </article>
+        <article class="report-item">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/putty_setup.png" alt="PuTTY setup" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Remote Access</h3>
+            <p>PuTTY and SSH were used to remotely access the Raspberry Pi during development and testing.</p>
+          </div>
+        </article>
+        <article class="report-item report-item--reverse">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/ssh_terminal_connection.png" alt="SSH terminal connection" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Terminal Connection</h3>
+            <p>This screenshot shows the SSH-based terminal connection used to control the device remotely.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="section-inner">
+      <p class="section-label">Alerting &amp; Cloud Flow</p>
+      <div class="report-flow">
+        <article class="report-item">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/sms_block_diagram.jpg" alt="SMS alert block diagram" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Alert Pipeline</h3>
+            <p>The SMS flow sends an alert message to the user when the animal is detected, along with the uploaded image link from Google Drive.</p>
+          </div>
+        </article>
+        <article class="report-item report-item--reverse">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/sms_recieved.jpg" alt="Received SMS screenshot" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Message Received</h3>
+            <p>This screenshot shows the actual SMS received after a detection event, validating the end-to-end notification flow.</p>
+          </div>
+        </article>
+        <article class="report-item">
+          <div class="report-media">
+            <img src="../assets/project/animal-detection/gdrive_pics_saved.png" alt="Google Drive folder with saved images" class="zoomable" loading="lazy">
+          </div>
+          <div class="report-copy">
+            <h3>Google Drive Storage</h3>
+            <p>Captured images are stored in Google Drive so the user can open the exact file from the alert message.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-label">Presentation</p>
+      <div class="doc-actions">
+        <a href="../assets/project/animal-detection/project_ppt.pptx" target="_blank" rel="noopener">Open PPTX</a>
+      </div>
+      <div class="doc-preview">
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vR511i_KLS90l28DaDVfwKiMXvTmXki5YTdbhXWMlxnUVJagO6uiczkD3_bULWoQPf1qNNnp5J3yVVP/pubembed?start=false&loop=false&delayms=60000" frameborder="0" width="1920" height="1109" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>        
+      </div>
+    </div>
+  </section>
 </main>
+
+<div class="lightbox" id="imageLightbox" aria-hidden="true">
+  <button type="button" id="closeLightbox" class="lightbox-close" aria-label="Close image">x</button>
+  <button type="button" id="prevLightbox" class="lightbox-prev" aria-label="Previous image">&#10094;</button>
+  <button type="button" id="nextLightbox" class="lightbox-next" aria-label="Next image">&#10095;</button>
+  <img id="lightboxImage" src="" alt="Expanded image">
+</div>
 
 <footer class="footer">
   <p>Built &amp; deployed on GitHub Pages.</p>
 </footer>
 
+<script>
+  (function () {
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const closeBtn = document.getElementById('closeLightbox');
+    const prevBtn = document.getElementById('prevLightbox');
+    const nextBtn = document.getElementById('nextLightbox');
+    const images = document.querySelectorAll('.zoomable');
+    let activeIndex = 0;
+
+    if (!lightbox || !lightboxImage || !closeBtn || !prevBtn || !nextBtn || images.length === 0) {
+      return;
+    }
+
+    const showImage = (index) => {
+      const total = images.length;
+      activeIndex = (index + total) % total;
+      const image = images[activeIndex];
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+    };
+
+    const openLightbox = (index) => {
+      showImage(index);
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+    };
+
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => openLightbox(index));
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', () => showImage(activeIndex - 1));
+    nextBtn.addEventListener('click', () => showImage(activeIndex + 1));
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (!lightbox.classList.contains('active')) {
+        return;
+      }
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') showImage(activeIndex - 1);
+      if (event.key === 'ArrowRight') showImage(activeIndex + 1);
+    });
+  })();
+</script>
 <script src="../script.js"></script>
 </body>
 </html>

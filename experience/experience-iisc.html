@@ -9,14 +9,430 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css" />
     <style>
-        .detail-meta { font-family: var(--mono); font-size: 0.85rem; color: var(--gray-2); margin: 0 0 20px; }
-        .detail-desc { color: var(--gray-1); font-size: 1rem; margin: 0 0 20px; line-height: 1.7; }
-        .detail-list { margin: 0 0 20px; padding-left: 20px; }
-        .detail-list li { color: var(--gray-1); font-size: 0.95rem; margin-bottom: 8px; }
-        .links-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
-        .links-row a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; height: 40px; font-family: var(--mono); font-size: 0.72rem; border: 1px solid var(--line); color: var(--gray-2); border-radius: 4px; transition: border-color 0.2s, color 0.2s; text-decoration: none; }
-        .links-row a:hover { border-color: var(--white); color: var(--white); }
-        .links-row a svg { width: 14px; height: 14px; fill: currentColor; }
+        .detail-meta {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            color: var(--gray-2);
+            margin: 0 0 20px;
+        }
+
+        /* ── Project KPIs ── */
+        .project-kpis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin: 16px 0 20px;
+        }
+        .project-kpis .kpi {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            padding: 14px 16px;
+            border-radius: 6px;
+        }
+        .project-kpis .kpi dt {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--gray-2);
+            margin-bottom: 4px;
+        }
+        .project-kpis .kpi dd {
+            margin: 0;
+            color: var(--white);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* ── Download bar ── */
+        .download-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 16px 22px;
+            margin-bottom: 28px;
+            align-items: center;
+        }
+        .download-bar .label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 4px;
+        }
+        .download-bar .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--bg);
+            background: var(--white);
+            border: 1px solid var(--white);
+            border-radius: 6px;
+            transition: opacity 0.2s, transform 0.15s;
+            text-decoration: none;
+        }
+        .download-bar .btn-download:hover {
+            opacity: 0.85;
+            transform: scale(1.01);
+        }
+        .download-bar .btn-download svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+        .download-bar .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none;
+        }
+        .download-bar .btn-ghost:hover {
+            border-color: var(--white);
+            color: var(--white);
+        }
+        .download-bar .btn-ghost svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* ── Text-only content blocks ── */
+        .content-block {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            padding: 20px 24px;
+            border-radius: 8px;
+        }
+        .content-block h3 {
+            font-family: var(--mono);
+            font-size: 1rem;
+            color: var(--white);
+            margin: 0 0 10px;
+        }
+        .content-block p {
+            color: var(--gray-1);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 0 0 12px;
+        }
+        .content-block ul {
+            margin: 0 0 4px;
+            padding-left: 20px;
+        }
+        .content-block li {
+            color: var(--gray-1);
+            font-size: 0.93rem;
+            margin-bottom: 6px;
+        }
+
+        /* ── Spec grid ── */
+        .spec-grid {
+            border: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+        .spec-item {
+            border-bottom: 1px solid var(--line);
+            padding: 12px 14px;
+        }
+        .spec-item:nth-child(odd) {
+            border-right: 1px solid var(--line);
+        }
+        .spec-item:nth-last-child(-n + 2) {
+            border-bottom: none;
+        }
+        .spec-item .label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            color: var(--gray-2);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .spec-item .value {
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        /* ── Feature cards ── */
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+        .preview-card {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            padding: 18px;
+            border-radius: 8px;
+        }
+        .preview-card h3 {
+            margin: 0 0 8px;
+            font-family: var(--mono);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+        .preview-card p {
+            margin: 0;
+            color: var(--gray-1);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* ── Gallery ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 8px;
+        }
+        .gallery-grid figure {
+            margin: 0;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            cursor: pointer;
+        }
+        .gallery-grid figure:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+        .gallery-grid figure img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+            background: var(--bg);
+        }
+        .gallery-grid figure figcaption {
+            padding: 8px 12px;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--gray-2);
+            text-align: center;
+            border-top: 1px solid var(--line);
+            letter-spacing: 0.03em;
+        }
+
+        /* ── Lightbox ── */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.8rem;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 300;
+            transition: opacity 0.2s;
+            line-height: 1;
+            z-index: 10;
+        }
+        .lightbox-close:hover { opacity: 0.6; }
+        .lightbox-prev, .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3.5rem;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            user-select: none;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+        .lightbox-prev:hover, .lightbox-next:hover { opacity: 0.6; }
+        .lightbox-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.4rem 1.5rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            max-width: 80%;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 10;
+        }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            z-index: 5;
+        }
+
+        /* ── Doc previews ── */
+        .doc-preview {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            margin-top: 14px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .doc-preview iframe {
+            width: 100%;
+            height: 460px;
+            border: none;
+            display: block;
+            background: var(--bg-alt);
+        }
+        .doc-preview-fallback {
+            padding: 14px 18px;
+            border-top: 1px solid var(--line);
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--gray-2);
+            margin: 0;
+        }
+        .doc-preview-fallback a {
+            color: var(--gray-1);
+        }
+
+        /* ── Code preview ── */
+        .code-preview {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 14px;
+        }
+        .code-preview .code-header {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--line);
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .code-preview .code-body {
+            padding: 16px 20px;
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .code-preview .code-body pre {
+            margin: 0;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: var(--gray-1);
+            white-space: pre;
+        }
+
+        .slides-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            margin-top: 14px;
+        }
+        .slides-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (max-width: 760px) {
+            .spec-grid {
+                grid-template-columns: 1fr;
+            }
+            .spec-item:nth-child(odd) {
+                border-right: none;
+            }
+            .spec-item:nth-last-child(-n + 2) {
+                border-bottom: 1px solid var(--line);
+            }
+            .spec-item:last-child {
+                border-bottom: none;
+            }
+            .doc-preview iframe {
+                height: 300px;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .gallery-grid figure img {
+                height: 120px;
+            }
+            .download-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 14px 16px;
+            }
+            .download-bar .label {
+                margin-bottom: 6px;
+            }
+            .lightbox-prev, .lightbox-next { font-size: 2.2rem; }
+            .lightbox-title { font-size: 0.9rem; white-space: normal; }
+            .lightbox-close { font-size: 2.2rem; top: 10px; right: 16px; }
+            .content-block {
+                padding: 16px 18px;
+            }
+            .code-preview .code-body {
+                max-height: 300px;
+                padding: 12px 14px;
+            }
+            .code-preview .code-body pre {
+                font-size: 0.7rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -47,36 +463,154 @@
 
         <header class="page-header">
             <div class="section-inner">
-                <a class="back-link" href="../experience.html">← Back to Experience</a>
+                <a class="back-link" href="../experience.html">&larr; Back to Experience</a>
                 <h1 class="page-title">Indian Institute of Science</h1>
                 <p class="page-sub">Research Intern, MSDLab (Dept. of ESE) · Dec 2025 – Feb 2026</p>
+
+                <!-- KPI cards -->
+                <dl class="project-kpis">
+                    <div class="kpi"><dt>Project Type</dt><dd>TCAD Automation Tool</dd></div>
+                    <div class="kpi"><dt>Core Language</dt><dd>Python</dd></div>
+                    <div class="kpi"><dt>Framework</dt><dd>Tkinter</dd></div>
+                    <div class="kpi"><dt>Focus</dt><dd>TCL Script Generation</dd></div>
+                </dl>
+
+                <!-- ─── DOWNLOAD BAR ─── -->
+                <div class="download-bar">
+                    <span class="label">Downloads</span>
+                    <a class="btn-download" href="../assets/experience/iisc/TCLGenerator.exe" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        Download EXE
+                    </a>
+                    <a class="btn-ghost" href="../assets/experience/iisc/certificate.pdf" target="_blank" rel="noopener">Certificate PDF</a>
+                    <a class="btn-ghost" href="../assets/experience/iisc/ppt.pptx" target="_blank" rel="noopener">PPTX</a>
+                </div>
             </div>
         </header>
 
+        <!-- ─── OVERVIEW ─── -->
         <section class="section">
             <div class="section-inner">
                 <p class="section-label">Overview</p>
-                <p class="detail-desc">
-                    Developed automation tools for TCAD simulation analysis, enabling efficient extraction
-                    of 1D data curves from complex semiconductor simulation files.
-                </p>
-                <ul class="detail-list">
-                    <li>Developed a Python TCL script generator for Sentaurus Visual supporting 3D (cutplane-to-cutline) and 2D TCAD structure analysis, plus transient PLT-based plotting, with both terminal and GUI interfaces.</li>
-                    <li>Implemented multi-node, multi-TDR, and multi-cutline batch processing with parameter short-code mapping, automating extraction of 1D data curves from complex TCAD simulation files.</li>
-                </ul>
+                <div class="content-block">
+                    <h3>TCAD TCL Script Generator</h3>
+                    <p>Developed a Python-based TCL script generator for Sentaurus Visual that automates the extraction of 1D data curves from complex 3D and 2D TCAD simulation files (.tdr) and PLT transient data.</p>
+                    <ul>
+                        <li>Supports 3D analysis (cutplane → cutline → 1D plot), 2D analysis (direct cutline), and PLT-based transient plotting.</li>
+                        <li>Automates repetitive manual steps — loading files, creating plots, linking axes, and exporting data.</li>
+                        <li>Handles multi-node, multi-TDR, and multi-cutline batch processing with parameter short-code mapping.</li>
+                        <li>Provides both terminal-based and GUI-based versions for flexibility.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-                <p class="section-label" style="margin-top:32px;">Skills</p>
-                <div class="card-skills">
-                    <span class="tag-pill">Python</span>
-                    <span class="tag-pill">Sentaurus TCAD</span>
-                    <span class="tag-pill">TCL Scripting</span>
+        <!-- ─── TOOL ARCHITECTURE ─── -->
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Tool Architecture</p>
+                <div class="content-block">
+                    <h3>Modular Command Generator</h3>
+                    <p>The tool accepts high-level user parameters (Node IDs, Cut locations, Parameters) and algorithmically generates a complete, error-free TCL script for Sentaurus Visual.</p>
+                    <div class="spec-grid">
+                        <div class="spec-item"><span class="label">Mode 1</span><span class="value">3D: Cutplane → Cutline → 1D Plot</span></div>
+                        <div class="spec-item"><span class="label">Mode 2</span><span class="value">2D: Direct Cutline → 1D Plot</span></div>
+                        <div class="spec-item"><span class="label">Mode 3</span><span class="value">PLT: Transient analysis with CSV/PNG export</span></div>
+                        <div class="spec-item"><span class="label">Output</span><span class="value">Ready-to-run TCL script for Sentaurus Visual</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── FEATURES ─── -->
+        <section class="section">
+            <div class="section-inner">
+                <p class="section-label">Key Features</p>
+                <div class="preview-grid">
+                    <div class="preview-card">
+                        <h3>Multi-Node &amp; Multi-TDR</h3>
+                        <p>Process multiple simulation nodes and TDR files in batch — each with its own parameter values — all from a single configuration.</p>
+                    </div>
+                    <div class="preview-card">
+                        <h3>Multi-Cutline Handling</h3>
+                        <p>Define multiple cut sets (straight or L-shaped) across different planes and axes, with independent parameter selections for each.</p>
+                    </div>
+                    <div class="preview-card">
+                        <h3>Parameter Short-Code Mapping</h3>
+                        <p>Uses a dictionary to abbreviate long parameter names (e.g., DopingConcentration → DC), keeping generated TCL scripts clean and readable.</p>
+                    </div>
+                    <div class="preview-card">
+                        <h3>GUI &amp; Terminal Versions</h3>
+                        <p>Offers both a user-friendly GUI (built with Tkinter) for interactive use and a terminal-based version for scripting and automation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── GALLERY ─── -->
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Screenshots</p>
+                <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:12px;">
+                    Click any image to expand. Add your screenshots to <code>assets/experience/iisc/screenshots/</code>.
+                </p>
+                <div class="gallery-grid" id="galleryContainer">
+                    <!-- ─── Placeholder images — replace with actual screenshots ─── -->
+
+                    <figure>
+                        <img class="gallery-img" src="../assets/experience/iisc/mode1.png" alt="Mode 1 — 3D Analysis" data-title="Mode 1: 3D Analysis — Cutplane to Cutline" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-text').style.display='flex'" />
+                        <figcaption>Mode 1 — 3D Analysis</figcaption>
+                        <div class="placeholder-text" style="display:none; height:160px; background:var(--panel); align-items:center; justify-content:center; color:var(--gray-3); font-family:var(--mono); font-size:0.7rem; padding:12px; text-align:center; border-bottom:1px solid var(--line);">
+                            Add screenshot: <code>mode1.png</code>
+                        </div>
+                    </figure>
+                    <figure>
+                        <img class="gallery-img" src="../assets/experience/iisc/mode2.png" alt="Mode 2 — 2D Analysis" data-title="Mode 2: 2D Analysis — Direct Cutline" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-text').style.display='flex'" />
+                        <figcaption>Mode 2 — 2D Analysis</figcaption>
+                        <div class="placeholder-text" style="display:none; height:160px; background:var(--panel); align-items:center; justify-content:center; color:var(--gray-3); font-family:var(--mono); font-size:0.7rem; padding:12px; text-align:center; border-bottom:1px solid var(--line);">
+                            Add screenshot: <code>mode2.png</code>
+                        </div>
+                    </figure>
+                    <figure>
+                        <img class="gallery-img" src="../assets/experience/iisc/mode3.png" alt="Mode 3 — PLT Analysis" data-title="Mode 3: PLT Analysis — Transient Plotting" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-text').style.display='flex'" />
+                        <figcaption>Mode 3 — PLT Analysis</figcaption>
+                        <div class="placeholder-text" style="display:none; height:160px; background:var(--panel); align-items:center; justify-content:center; color:var(--gray-3); font-family:var(--mono); font-size:0.7rem; padding:12px; text-align:center; border-bottom:1px solid var(--line);">
+                            Add screenshot: <code>mode3.png</code>
+                        </div>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── DOCUMENT PREVIEWS ─── -->
+        <section class="section">
+            <div class="section-inner">
+                <p class="section-label">Documents</p>
+
+                <!-- Certificate Preview -->
+                <div style="margin-bottom:24px;">
+                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📄 Certificate</p>
+                    <div class="doc-preview">
+                        <iframe src="../assets/experience/iisc/certificate.pdf" title="IISc Certificate preview" loading="lazy"></iframe>
+                        <p class="doc-preview-fallback">
+                            <a href="../assets/experience/iisc/certificate.pdf" target="_blank" rel="noopener">📄 Download Certificate PDF ↗</a>
+                        </p>
+                    </div>
                 </div>
 
-                <div class="links-row">
-                    <a href="https://github.com/adhishjs" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                        GitHub
-                    </a>
+                <!-- PPT Preview -->
+                <div style="margin-bottom:24px;">
+                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📊 Presentation — TCAD TCL Script Generator</p>
+                    <div class="slides-container">
+                        <iframe src="https://docs.google.com/gviewer?url=https://drive.google.com/uc?id=YOUR_FILE_ID&embedded=true" 
+                                title="TCAD TCL Script Generator presentation" 
+                                loading="lazy">
+                        </iframe>
+                    </div>
+                    <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gray-3); margin-top:6px;">
+                        ⚡ To preview the PPTX, upload it to Google Drive, get a shareable link, extract the file ID, and replace <code>YOUR_FILE_ID</code> in the iframe <code>src</code> above. Or 
+                        <a href="../assets/experience/iisc/ppt.pptx" target="_blank" rel="noopener" style="color:var(--gray-1); text-decoration:underline;">download PPTX directly ↗</a>
+                    </p>
                 </div>
             </div>
         </section>
@@ -87,6 +621,102 @@
         <p>Built &amp; deployed on GitHub Pages.</p>
     </footer>
 
+    <!-- ─── LIGHTBOX ─── -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <span class="lightbox-prev" id="lightboxPrev">&#10094;</span>
+        <span class="lightbox-next" id="lightboxNext">&#10095;</span>
+        <div class="lightbox-title" id="lightboxTitle">Title</div>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="Expanded view" />
+    </div>
+
     <script src="../script.js"></script>
+    <script>
+        // ── Lightbox logic ──
+        (function() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxTitle = document.getElementById('lightboxTitle');
+            const closeBtn = document.getElementById('lightboxClose');
+            const prevBtn = document.getElementById('lightboxPrev');
+            const nextBtn = document.getElementById('lightboxNext');
+
+            const galleryContainer = document.getElementById('galleryContainer');
+            const images = galleryContainer.querySelectorAll('.gallery-img');
+            let currentIndex = 0;
+
+            function openLightbox(index) {
+                if (index < 0) index = images.length - 1;
+                if (index >= images.length) index = 0;
+                currentIndex = index;
+                const img = images[currentIndex];
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxTitle.textContent = img.dataset.title || img.alt || 'Image';
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function prevImage() {
+                openLightbox(currentIndex - 1);
+            }
+
+            function nextImage() {
+                openLightbox(currentIndex + 1);
+            }
+
+            images.forEach((img, idx) => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openLightbox(idx);
+                });
+            });
+
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', prevImage);
+            nextBtn.addEventListener('click', nextImage);
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevImage();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextImage();
+                }
+            });
+        })();
+
+        // ── Load Python source preview ──
+        (function() {
+            fetch('../assets/experience/iisc/script_gui.py')
+                .then(response => response.text())
+                .then(text => {
+                    // Show first 50 lines
+                    const lines = text.split('\n');
+                    const preview = lines.slice(0, 50).join('\n');
+                    const remaining = lines.length > 50 ? `\n\n... (${lines.length - 50} more lines)` : '';
+                    document.getElementById('pythonCodePreview').textContent = preview + remaining;
+                })
+                .catch(() => {
+                    document.getElementById('pythonCodePreview').textContent = 'Unable to load code. Download the file above to view the full source.';
+                });
+        })();
+    </script>
+
 </body>
 </html>
