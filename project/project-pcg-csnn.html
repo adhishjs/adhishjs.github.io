@@ -1,524 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Low Power PCG Classification — Adhish JS</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css">
-<style>
-  .project-meta-box{
-    margin:14px 0 0;
-    border:1px solid var(--line);
-    background:var(--panel);
-  }
-  .project-meta-row{
-    display:grid;
-    grid-template-columns:170px 1fr;
-    border-bottom:1px solid var(--line);
-  }
-  .project-meta-row:last-child{border-bottom:none;}
-  .project-meta-label,
-  .project-meta-value{
-    padding:10px 14px;
-    font-family:var(--mono);
-    font-size:0.74rem;
-    letter-spacing:0.02em;
-  }
-  .project-meta-label{
-    color:var(--gray-2);
-    border-right:1px solid var(--line);
-    text-transform:uppercase;
-  }
-  .project-meta-value{color:var(--gray-1);}
-  .project-meta-value a{
-    color:var(--gray-1);
-    text-decoration:underline;
-    text-underline-offset:2px;
-  }
-  .project-meta-value a:hover{color:var(--white);}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low Power PCG Classification — Adhish JS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .project-meta-box { margin: 14px 0 0; border: 1px solid var(--line); background: var(--panel); }
+        .project-meta-row { display: grid; grid-template-columns: 170px 1fr; border-bottom: 1px solid var(--line); }
+        .project-meta-row:last-child { border-bottom: none; }
+        .project-meta-label, .project-meta-value { padding: 10px 14px; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.02em; }
+        .project-meta-label { color: var(--gray-2); border-right: 1px solid var(--line); text-transform: uppercase; }
+        .project-meta-value { color: var(--gray-1); }
+        .project-meta-value a { color: var(--gray-1); text-decoration: underline; text-underline-offset: 2px; }
+        .project-meta-value a:hover { color: var(--white); }
 
-  .project-kpis{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-    gap:12px;
-    margin-top:20px;
-  }
-  .project-kpis .kpi{
-    border:1px solid var(--line);
-    background:var(--panel);
-    padding:14px 16px;
-  }
-  .project-kpis .kpi dt{
-    font-family:var(--mono);
-    font-size:0.68rem;
-    letter-spacing:0.05em;
-    text-transform:uppercase;
-    color:var(--gray-2);
-    margin-bottom:6px;
-  }
-  .project-kpis .kpi dd{
-    margin:0;
-    color:var(--white);
-    font-size:1rem;
-    font-weight:600;
-  }
+        .project-kpis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .project-kpis .kpi { border: 1px solid var(--line); background: var(--panel); padding: 14px 16px; }
+        .project-kpis .kpi dt { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray-2); margin-bottom: 6px; }
+        .project-kpis .kpi dd { margin: 0; color: var(--white); font-size: 1rem; font-weight: 600; }
 
-  .pipeline{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
-    gap:12px;
-    margin-top:10px;
-  }
-  .pipeline-step{
-    border:1px solid var(--line);
-    background:var(--bg-alt);
-    padding:16px;
-  }
-  .pipeline-step .step-id{
-    font-family:var(--mono);
-    font-size:0.68rem;
-    color:var(--gray-2);
-    margin:0 0 8px;
-    letter-spacing:0.05em;
-  }
-  .pipeline-step h3{
-    margin:0 0 6px;
-    font-family:var(--mono);
-    font-size:0.9rem;
-    color:var(--white);
-  }
-  .pipeline-step p{
-    margin:0;
-    font-size:0.9rem;
-    color:var(--gray-1);
-  }
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .pipeline-step { border: 1px solid var(--line); background: var(--bg-alt); padding: 16px; }
+        .pipeline-step .step-id { font-family: var(--mono); font-size: 0.68rem; color: var(--gray-2); margin: 0 0 8px; letter-spacing: 0.05em; }
+        .pipeline-step h3 { margin: 0 0 6px; font-family: var(--mono); font-size: 0.9rem; color: var(--white); }
+        .pipeline-step p { margin: 0; font-size: 0.9rem; color: var(--gray-1); }
 
-  .spec-grid{
-    border:1px solid var(--line);
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-  }
-  .spec-item{
-    border-bottom:1px solid var(--line);
-    padding:14px 16px;
-  }
-  .spec-item:nth-child(odd){
-    border-right:1px solid var(--line);
-  }
-  .spec-item:nth-last-child(-n + 2){
-    border-bottom:none;
-  }
-  .spec-item .label{
-    display:block;
-    font-family:var(--mono);
-    font-size:0.68rem;
-    color:var(--gray-2);
-    margin-bottom:6px;
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-  }
-  .spec-item .value{
-    color:var(--white);
-    font-size:0.95rem;
-  }
+        .spec-grid {
+            border: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .spec-item { border-bottom: 1px solid var(--line); padding: 14px 16px; }
+        .spec-item:nth-child(odd) { border-right: 1px solid var(--line); }
+        .spec-item:nth-last-child(-n + 2) { border-bottom: none; }
+        .spec-item .label { display: block; font-family: var(--mono); font-size: 0.68rem; color: var(--gray-2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .spec-item .value { color: var(--white); font-size: 0.95rem; }
 
-  .benchmark-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-    gap:14px;
-  }
-  .benchmark-card{
-    border:1px solid var(--line);
-    background:var(--panel);
-    padding:10px;
-  }
-  .benchmark-card img{
-    width:100%;
-    height:190px;
-    object-fit:cover;
-    border:1px solid var(--line);
-    cursor:pointer;
-  }
-  .benchmark-card p{
-    margin:10px 4px 4px;
-    font-family:var(--mono);
-    font-size:0.75rem;
-    color:var(--gray-2);
-  }
+        .contact-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 2rem 2rem;
+            background: var(--panel);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .contact-card p { color: var(--gray-1); font-size: 1rem; margin-bottom: 0.5rem; line-height: 1.6; }
+        .contact-card .sub { color: var(--gray-2); font-size: 0.9rem; margin-bottom: 1.2rem; line-height: 1.5; }
+        .contact-card .btn-request {
+            display: inline-block;
+            padding: 0.7rem 1.8rem;
+            border: 1px solid var(--gray-1);
+            color: var(--gray-1);
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .contact-card .btn-request:hover {
+            background: var(--gray-1);
+            color: var(--bg);
+        }
 
-  .doc-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin:0;
-  }
-  .doc-actions a{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    font-family:var(--mono);
-    font-size:0.75rem;
-    color:var(--gray-1);
-    border:1px solid var(--line);
-    padding:10px 14px;
-  }
-  .doc-actions a:hover{
-    border-color:var(--white);
-    color:var(--white);
-    opacity:1;
-  }
-  .doc-preview + .doc-actions{
-    margin-top:18px;
-  }
-  .doc-actions + .doc-preview{
-    margin-top:18px;
-  }
-  .doc-preview + .doc-preview{
-    margin-top:18px;
-  }
-  .doc-preview + .doc-preview{
-    margin-top:18px;
-  }
-
-  .lightbox{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    background:rgba(0,0,0,0.9);
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-  }
-  .lightbox.active{display:flex;}
-  .lightbox img{
-    max-width:92vw;
-    max-height:84vh;
-    border:1px solid var(--line);
-  }
-  .lightbox button{
-    position:absolute;
-    background:transparent;
-    border:1px solid var(--line);
-    color:var(--white);
-    font-family:var(--mono);
-    width:34px;
-    height:34px;
-    cursor:pointer;
-  }
-  .lightbox .lightbox-close{
-    top:16px;
-    right:16px;
-  }
-  .lightbox .lightbox-prev,
-  .lightbox .lightbox-next{
-    top:50%;
-    transform:translateY(-50%);
-    width:42px;
-    height:42px;
-    font-size:1.2rem;
-    line-height:1;
-  }
-  .lightbox .lightbox-prev{left:16px;}
-  .lightbox .lightbox-next{right:16px;}
-
-  .slide-note{
-    margin:0 0 12px;
-    font-family:var(--mono);
-    font-size:0.75rem;
-    color:var(--gray-2);
-  }
-
-  @media (max-width:760px){
-    .project-meta-row{grid-template-columns:1fr;}
-    .project-meta-label{border-right:none;border-bottom:1px solid var(--line);}
-    .spec-grid{grid-template-columns:1fr;}
-    .spec-item:nth-child(odd){border-right:none;}
-    .spec-item:nth-last-child(-n + 2){border-bottom:1px solid var(--line);}
-    .spec-item:last-child{border-bottom:none;}
-    .lightbox .lightbox-prev,
-    .lightbox .lightbox-next{
-      width:36px;
-      height:36px;
-      font-size:1rem;
-    }
-  }
-</style>
-    <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "xjmb3dxdjt");
-</script></head>
+        @media (max-width: 760px) {
+            .project-meta-row { grid-template-columns: 1fr; }
+            .project-meta-label { border-right: none; border-bottom: 1px solid var(--line); }
+            .spec-grid { grid-template-columns: 1fr; }
+            .spec-item:nth-child(odd) { border-right: none; }
+            .spec-item:nth-last-child(-n + 2) { border-bottom: 1px solid var(--line); }
+            .spec-item:last-child { border-bottom: none; }
+            .contact-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
 <body>
 
-<div class="preloader" aria-hidden="true">
-  <span class="preloader-mark">ADHISH JS</span>
-  <div class="preloader-bar"></div>
-  <span class="preloader-status">loading</span>
-</div>
-
-<div class="grid-overlay" aria-hidden="true"></div>
-
-<header class="nav">
-  <div class="nav-inner">
-    <span class="nav-name">ADHISH JS</span>
-    <nav class="nav-links">
-      <a href="../index.html">Home</a>
-      <a href="../about.html">About</a>
-      <a href="../education.html">Education</a>
-      <a href="../projects.html" class="active">Projects</a>
-      <a href="../experience.html">Experience</a>
-      <a href="../contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-  <header class="page-header">
-    <div class="section-inner">
-      <a class="back-link" href="../projects.html">&larr; Back to Projects</a>
-      <h1 class="page-title">Low Power PCG Classification Using 1D CSNN</h1>
-      <p class="page-sub">Jan 2026 - Present</p>
-      <div class="project-meta-box" aria-label="Project metadata">
-        <div class="project-meta-row">
-          <span class="project-meta-label">Category</span>
-          <span class="project-meta-value">Academic Project</span>
-        </div>
-        <div class="project-meta-row">
-          <span class="project-meta-label">Guide</span>
-          <span class="project-meta-value"><a href="https://research.nitpy.ac.in/professor_profile/97/" target="_blank" rel="noopener">Dr. Suresh Balanethiram</a></span>
-        </div>
-        <div class="project-meta-row">
-          <span class="project-meta-label">Team Members</span>
-          <span class="project-meta-value">Ridwan Zakkir Hussain, N Balakrishna</span>
-        </div>
-      </div>
+    <div class="preloader" aria-hidden="true">
+        <span class="preloader-mark">ADHISH JS</span>
+        <div class="preloader-bar"></div>
+        <span class="preloader-status">loading</span>
     </div>
-  </header>
 
-  <section class="section">
-    <div class="section-inner">
-      <p class="section-label">Tools &amp; Stack</p>
-      <div class="card-skills">
-        <span class="tag-pill">Python</span>
-        <span class="tag-pill">PyTorch</span>
-        <span class="tag-pill">NumPy</span>
-        <span class="tag-pill">Signal Processing</span>
-        <span class="tag-pill">1D CSNN</span>
-        <span class="tag-pill">PhysioNet/CinC 2016</span>
-      </div>
-      <!-- <div class="card-links">
-        <a class="link-github" href="https://github.com/adhishjs" target="_blank" rel="noopener" aria-label="Open GitHub profile">
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          GitHub
-        </a>
-      </div> -->
-    </div>
-  </section>
+    <div class="grid-overlay" aria-hidden="true"></div>
 
-  <section class="section section-alt">
-    <div class="section-inner">
-      <p class="section-label">Overview</p>
-      <p class="pdetail-desc">This project targets low-power heart sound classification by combining compact neural architectures with robust time-frequency front-end representations. The model is designed for deployability on constrained hardware, while preserving high diagnostic quality across normal and abnormal PCG classes.</p>
-      <ul class="pdetail-list">
-        <li>Designed and optimized a compact 1D CSNN pipeline for binary PCG classification.</li>
-        <li>Evaluated CQT, Mel Spectrogram, Chirplet, CWT, and MFCC feature pipelines with identical training settings.</li>
-        <li>Analyzed overfitting behavior, sensitivity/specificity trade-offs, and confusion trends to choose a deployment-oriented configuration.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-inner">
-      <p class="section-label">Training Pipeline</p>
-      <div class="pipeline">
-        <article class="pipeline-step">
-          <p class="step-id">STEP 01</p>
-          <h3>Signal Conditioning</h3>
-          <p>PCG recordings are cleaned, normalized, and segmented into fixed-length windows.</p>
-        </article>
-        <article class="pipeline-step">
-          <p class="step-id">STEP 02</p>
-          <h3>Feature Generation</h3>
-          <p>Five time-frequency transforms are generated and benchmarked under a common setup.</p>
-        </article>
-        <article class="pipeline-step">
-          <p class="step-id">STEP 03</p>
-          <h3>1D CSNN Training</h3>
-          <p>A low-parameter convolutional spiking-inspired model is trained with early stopping.</p>
-        </article>
-        <article class="pipeline-step">
-          <p class="step-id">STEP 04</p>
-          <h3>Model Selection</h3>
-          <p>Best model is chosen using accuracy, sensitivity, specificity, and confusion behavior.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="section-inner">
-      <p class="section-label">Dataset &amp; Model Snapshot</p>
-      <div class="spec-grid">
-        <div class="spec-item">
-          <span class="label">Dataset</span>
-          <span class="value">PhysioNet/CinC 2016 Heart Sound Dataset</span>
+    <header class="nav">
+        <div class="nav-inner">
+            <span class="nav-name">ADHISH JS</span>
+            <nav class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../education.html">Education</a>
+                <a href="../projects.html" class="active">Projects</a>
+                <a href="../experience.html">Experience</a>
+                <a href="../contact.html">Contact</a>
+            </nav>
         </div>
-        <div class="spec-item">
-          <span class="label">Task</span>
-          <span class="value">Binary PCG classification (Normal / Abnormal)</span>
-        </div>
-        <div class="spec-item">
-          <span class="label">Model</span>
-          <span class="value">Compact 1D CSNN</span>
-        </div>
-        <div class="spec-item">
-          <span class="label">Parameter Budget</span>
-          <span class="value">Approximately 16K parameters</span>
-        </div>
-        <div class="spec-item">
-          <span class="label">Best Feature Family</span>
-          <span class="value">CQT representation</span>
-        </div>
-        <div class="spec-item">
-          <span class="label">Best Validation Accuracy</span>
-          <span class="value">96.8%</span>
-        </div>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <section class="section">
-    <div class="section-inner">
-      <p class="section-label">Benchmark Results</p>
-      <div class="benchmark-grid">
-        <figure class="benchmark-card">
-          <img src="../assets/project/pcg-csnn/plot1_best_accuracy.png" alt="Best validation accuracy comparison" class="zoomable" loading="lazy">
-          <p>Best validation accuracy comparison across feature extraction methods.</p>
-        </figure>
-        <figure class="benchmark-card">
-          <img src="../assets/project/pcg-csnn/plot2_performance_metrics.png" alt="Precision recall and F1 benchmark" class="zoomable" loading="lazy">
-          <p>Precision, recall, and F1 breakdown for all evaluated feature pipelines.</p>
-        </figure>
-        <figure class="benchmark-card">
-          <img src="../assets/project/pcg-csnn/plot3_sensitivity_specificity.png" alt="Sensitivity and specificity comparison" class="zoomable" loading="lazy">
-          <p>Sensitivity-specificity trend for deployment-critical diagnostic performance.</p>
-        </figure>
-        <figure class="benchmark-card">
-          <img src="../assets/project/pcg-csnn/plot4_confusion_matrices.png" alt="Confusion matrix comparison" class="zoomable" loading="lazy">
-          <p>Confusion matrix comparison showing class-level behavior across methods.</p>
-        </figure>
-        <figure class="benchmark-card">
-          <img src="../assets/project/pcg-csnn/plot5_train_loss.png" alt="Training loss across epochs" class="zoomable" loading="lazy">
-          <p>Training loss trends used to verify convergence and stability.</p>
-        </figure>
-        <figure class="benchmark-card">
-          <img src="../assets/project/pcg-csnn/plot11_overfitting_gap.png" alt="Generalization and overfitting gap" class="zoomable" loading="lazy">
-          <p>Generalization gap analysis to identify overfitting and robust configurations.</p>
-        </figure>
-      </div>
-    </div>
-  </section>
+    <main>
 
-  <section class="section section-alt">
-    <div class="section-inner">
-      <p class="section-label">Report &amp; Presentation</p>
-      <div class="doc-preview">
-        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSNu_klpzyUFIXXv9zNTVvYd_1gb63c3fX8IpKDqPcqk0u7-BKfgr4ron--AIlgS5_t0_l4VsTR5w3r/pubembed?start=false&loop=false&delayms=60000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>        
+        <header class="page-header">
+            <div class="section-inner">
+                <a class="back-link" href="../projects.html">&larr; Back to Projects</a>
+                <h1 class="page-title">Low Power PCG Classification Using 1D CSNN</h1>
+                <p class="page-sub">Jan 2026 – Present</p>
+                <div class="project-meta-box" aria-label="Project metadata">
+                    <div class="project-meta-row">
+                        <span class="project-meta-label">Category</span>
+                        <span class="project-meta-value">Academic Project</span>
+                    </div>
+                    <div class="project-meta-row">
+                        <span class="project-meta-label">Guide</span>
+                        <span class="project-meta-value"><a href="https://research.nitpy.ac.in/professor_profile/97/" target="_blank" rel="noopener">Dr. Suresh Balanethiram</a></span>
+                    </div>
+                    <div class="project-meta-row">
+                        <span class="project-meta-label">Team Members</span>
+                        <span class="project-meta-value">Ridwan Zakkir Hussain, N Balakrishna</span>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-      </div>
-      <div class="doc-actions">
-        <a href="../assets/project/pcg-csnn/Report.pdf" target="_blank" rel="noopener">Open Report PDF</a>
-      </div>
-      <div class="doc-preview">
-        <iframe src="../assets/project/pcg-csnn/Report.pdf" title="PCG CSNN report preview" loading="lazy"></iframe>
+        <section class="section">
+            <div class="section-inner">
+                <p class="section-label">Tools &amp; Stack</p>
+                <div class="card-skills">
+                    <span class="tag-pill">Python</span>
+                    <span class="tag-pill">PyTorch</span>
+                    <span class="tag-pill">NumPy</span>
+                    <span class="tag-pill">Signal Processing</span>
+                    <span class="tag-pill">1D CSNN</span>
+                    <span class="tag-pill">PhysioNet/CinC 2016</span>
+                </div>
+            </div>
+        </section>
 
-      </div>
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Overview</p>
+                <p class="pdetail-desc">This project targets low-power heart sound classification by combining compact neural architectures with robust time-frequency front-end representations. The model is designed for deployability on constrained hardware, while preserving high diagnostic quality across normal and abnormal PCG classes.</p>
+                <ul class="pdetail-list">
+                    <li>Designed and optimized a compact 1D CSNN pipeline for binary PCG classification.</li>
+                    <li>Evaluated CQT, Mel Spectrogram, Chirplet, CWT, and MFCC feature pipelines with identical training settings.</li>
+                    <li>Analyzed overfitting behavior, sensitivity/specificity trade-offs, and confusion trends to choose a deployment-oriented configuration.</li>
+                </ul>
+            </div>
+        </section>
 
-    </div>
-  </section>
+        <section class="section">
+            <div class="section-inner">
+                <p class="section-label">Training Pipeline</p>
+                <div class="pipeline">
+                    <article class="pipeline-step">
+                        <p class="step-id">STEP 01</p>
+                        <h3>Signal Conditioning</h3>
+                        <p>PCG recordings are cleaned, normalized, and segmented into fixed-length windows.</p>
+                    </article>
+                    <article class="pipeline-step">
+                        <p class="step-id">STEP 02</p>
+                        <h3>Feature Generation</h3>
+                        <p>Five time-frequency transforms are generated and benchmarked under a common setup.</p>
+                    </article>
+                    <article class="pipeline-step">
+                        <p class="step-id">STEP 03</p>
+                        <h3>1D CSNN Training</h3>
+                        <p>A low-parameter convolutional spiking-inspired model is trained with early stopping.</p>
+                    </article>
+                    <article class="pipeline-step">
+                        <p class="step-id">STEP 04</p>
+                        <h3>Model Selection</h3>
+                        <p>Best model is chosen using accuracy, sensitivity, specificity, and confusion behavior.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-</main>
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Dataset &amp; Model Snapshot</p>
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <span class="label">Dataset</span>
+                        <span class="value">PhysioNet/CinC 2016 Heart Sound Dataset</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Task</span>
+                        <span class="value">Binary PCG classification (Normal / Abnormal)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Model</span>
+                        <span class="value">Compact 1D CSNN</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Parameter Budget</span>
+                        <span class="value">Approximately 16K parameters</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Best Feature Family</span>
+                        <span class="value">CQT representation</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Best Validation Accuracy</span>
+                        <span class="value">96.8%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="lightbox" id="imageLightbox" aria-hidden="true">
-  <button type="button" id="closeLightbox" class="lightbox-close" aria-label="Close image">x</button>
-  <button type="button" id="prevLightbox" class="lightbox-prev" aria-label="Previous image">&#10094;</button>
-  <button type="button" id="nextLightbox" class="lightbox-next" aria-label="Next image">&#10095;</button>
-  <img id="lightboxImage" src="" alt="Expanded benchmark result">
-</div>
 
-<footer class="footer">
-  <p>Built &amp; deployed on GitHub Pages.</p>
-</footer>
 
-<script>
-  (function () {
-    const lightbox = document.getElementById('imageLightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const closeBtn = document.getElementById('closeLightbox');
-    const prevBtn = document.getElementById('prevLightbox');
-    const nextBtn = document.getElementById('nextLightbox');
-    const images = document.querySelectorAll('.zoomable');
-    let activeIndex = 0;
+        <!-- ─── REPORT (Contact for Access) ─── -->
+        <section class="section section-alt">
+            <div class="section-inner">
+                <p class="section-label">Report &amp; Presentation</p>
+                <div class="contact-card">
+                    <p>The full project report and presentation slides are not publicly hosted at this time.</p>
+                    <p class="sub">If you are interested in reviewing the methodology, implementation details, or final results, please reach out directly.</p>
+                    <a class="btn-request" href="../contact.html">Request Results →</a>
+                </div>
+            </div>
+        </section>
 
-    if (!lightbox || !lightboxImage || !closeBtn || !prevBtn || !nextBtn || images.length === 0) {
-      return;
-    }
+    </main>
 
-    const showImage = (index) => {
-      const total = images.length;
-      activeIndex = (index + total) % total;
-      const image = images[activeIndex];
-      lightboxImage.src = image.src;
-      lightboxImage.alt = image.alt;
-    };
+    <footer class="footer">
+        <p>Built &amp; deployed on GitHub Pages.</p>
+    </footer>
 
-    images.forEach((img, index) => {
-      img.addEventListener('click', () => {
-        showImage(index);
-        lightbox.classList.add('active');
-        lightbox.setAttribute('aria-hidden', 'false');
-      });
-    });
-
-    const closeLightbox = () => {
-      lightbox.classList.remove('active');
-      lightbox.setAttribute('aria-hidden', 'true');
-      lightboxImage.src = '';
-    };
-
-    closeBtn.addEventListener('click', closeLightbox);
-    prevBtn.addEventListener('click', () => showImage(activeIndex - 1));
-    nextBtn.addEventListener('click', () => showImage(activeIndex + 1));
-
-    lightbox.addEventListener('click', (event) => {
-      if (event.target === lightbox) {
-        closeLightbox();
-      }
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (!lightbox.classList.contains('active')) {
-        return;
-      }
-      if (event.key === 'Escape') {
-        closeLightbox();
-      }
-      if (event.key === 'ArrowLeft') {
-        showImage(activeIndex - 1);
-      }
-      if (event.key === 'ArrowRight') {
-        showImage(activeIndex + 1);
-      }
-    });
-  })();
-</script>
-<script src="../script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>

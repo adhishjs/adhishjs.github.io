@@ -79,7 +79,7 @@
             letter-spacing: 0.05em;
             margin-right: 4px;
         }
-        .download-bar .btn-download {
+        .download-bar .btn-scroll {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -91,14 +91,15 @@
             background: var(--white);
             border: 1px solid var(--white);
             border-radius: 6px;
+            cursor: pointer;
             transition: opacity 0.2s, transform 0.15s;
             text-decoration: none;
         }
-        .download-bar .btn-download:hover {
+        .download-bar .btn-scroll:hover {
             opacity: 0.85;
             transform: scale(1.01);
         }
-        .download-bar .btn-download svg {
+        .download-bar .btn-scroll svg {
             width: 18px;
             height: 18px;
             fill: currentColor;
@@ -157,7 +158,7 @@
             margin-bottom: 6px;
         }
 
-        /* ── Spec grid (inside architecture) ── */
+        /* ── Spec grid ── */
         .spec-grid {
             border: 1px solid var(--line);
             display: grid;
@@ -352,23 +353,31 @@
             color: var(--gray-1);
         }
 
-        .slides-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
+        /* ── Request files card ── */
+        .request-card {
             border: 1px solid var(--line);
-            background: var(--bg);
-            margin-top: 14px;
+            border-radius: 8px;
+            padding: 2rem 2rem;
+            background: var(--panel);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
         }
-        .slides-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+        .request-card p { color: var(--gray-1); font-size: 1rem; margin-bottom: 0.5rem; line-height: 1.6; }
+        .request-card .sub { color: var(--gray-2); font-size: 0.9rem; margin-bottom: 1.2rem; line-height: 1.5; }
+        .request-card .btn-request {
+            display: inline-block;
+            padding: 0.7rem 1.8rem;
+            border: 1px solid var(--gray-1);
+            color: var(--gray-1);
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .request-card .btn-request:hover {
+            background: var(--gray-1);
+            color: var(--bg);
         }
 
         @media (max-width: 760px) {
@@ -407,6 +416,7 @@
             .content-block {
                 padding: 16px 18px;
             }
+            .request-card { padding: 1.5rem; }
         }
     </style>
     <script type="text/javascript">
@@ -459,17 +469,20 @@
                 <!-- ─── DOWNLOAD BAR ─── -->
                 <div class="download-bar">
                     <span class="label">Downloads</span>
-                    <a class="btn-download" href="../assets/experience/lnt/SAT_EST.exe" target="_blank" rel="noopener">
+                    <!-- EXE button that scrolls to request section -->
+                    <button class="btn-scroll" onclick="document.getElementById('request-files').scrollIntoView({behavior:'smooth'})">
                         <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                        Download EXE
-                    </a>
-                    <a class="btn-ghost" href="../assets/experience/lnt/Internship_Report.pdf" target="_blank" rel="noopener">Report PDF</a>
-                    <a class="btn-ghost" href="../assets/experience/lnt/Certificate.pdf" target="_blank" rel="noopener">Certificate PDF</a>
+                        EXE
+                    </button>
+                    <a class="btn-ghost" href="../assets/experience/lnt/Certificate.pdf" target="_blank" rel="noopener">Certificate</a>
+                    <a class="btn-ghost" onclick="document.getElementById('request-files').scrollIntoView({behavior:'smooth'})">Report</a>
+                    <a class="btn-ghost" onclick="document.getElementById('request-files').scrollIntoView({behavior:'smooth'})">Presentation</a>
+
                 </div>
             </div>
         </header>
 
-        <!-- ─── OVERVIEW (text only) ─── -->
+        <!-- ─── OVERVIEW ─── -->
         <section class="section">
             <div class="section-inner">
                 <p class="section-label">Overview</p>
@@ -485,7 +498,7 @@
             </div>
         </section>
 
-        <!-- ─── TOOL ARCHITECTURE (text only) ─── -->
+        <!-- ─── TOOL ARCHITECTURE ─── -->
         <section class="section section-alt">
             <div class="section-inner">
                 <p class="section-label">Tool Architecture</p>
@@ -578,39 +591,26 @@
 
                 <!-- Certificate Preview -->
                 <div style="margin-bottom:24px;">
-                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📄 Certificate</p>
+                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">Certificate</p>
                     <div class="doc-preview">
                         <iframe src="../assets/experience/lnt/Certificate.pdf" title="L&T Certificate preview" loading="lazy"></iframe>
                         <p class="doc-preview-fallback">
-                            <a href="../assets/experience/lnt/Certificate.pdf" target="_blank" rel="noopener">📄 Download Certificate PDF ↗</a>
+                            <a href="../assets/experience/lnt/Certificate.pdf" target="_blank" rel="noopener">Download Certificate PDF ↗</a>
                         </p>
                     </div>
                 </div>
 
-                <!-- Internship Report Preview -->
-                <div style="margin-bottom:24px;">
-                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📄 Internship Report</p>
-                    <div class="doc-preview">
-                        <iframe src="../assets/experience/lnt/Internship_Report.pdf" title="L&T Internship Report preview" loading="lazy"></iframe>
-                        <p class="doc-preview-fallback">
-                            <a href="../assets/experience/lnt/Internship_Report.pdf" target="_blank" rel="noopener">📄 Download Report PDF ↗</a>
-                        </p>
-                    </div>
-                </div>
 
-                <!-- PPT Preview -->
-                <div>
-                    <p style="font-family:var(--mono); font-size:0.78rem; color:var(--gray-2); margin-bottom:6px;">📊 Presentation — FSO Link Budget Formulas</p>
-                    <div class="slides-container">
-                        <iframe src="https://docs.google.com/gviewer?url=https://drive.google.com/uc?id=YOUR_FILE_ID&embedded=true" 
-                                title="FSO Link Budget Formulas presentation" 
-                                loading="lazy">
-                        </iframe>
-                    </div>
-                    <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gray-3); margin-top:6px;">
-                        ⚡ To preview the PPTX, upload it to Google Drive, get a shareable link, extract the file ID, and replace <code>YOUR_FILE_ID</code> in the iframe <code>src</code> above. Or 
-                        <a href="../assets/experience/lnt/FSO_Link_Budget_Formulas.pptx" target="_blank" rel="noopener" style="color:var(--gray-1); text-decoration:underline;">download PPTX directly ↗</a>
-                    </p>
+        </section>
+
+        <!-- ─── REQUEST FILES SECTION ─── -->
+        <section class="section section-alt" id="request-files">
+            <div class="section-inner">
+                <p class="section-label">File Availability</p>
+                <div class="request-card">
+                    <p>The executable (EXE), Report (PDF) and presentation (PPTX) files for this project are available upon request.</p>
+                    <p class="sub">Due to file size and distribution policies, these files are shared on a case-by-case basis. Please reach out directly to request access.</p>
+                    <a class="btn-request" href="../contact.html">Contact Me →</a>
                 </div>
             </div>
         </section>
