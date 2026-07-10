@@ -929,7 +929,28 @@ body.is-loaded .preloader{
 .pdetail-files a:hover{border-color:var(--white);color:var(--white);opacity:1;}
 
 
-
+.request-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 2rem;
+    background: var(--panel);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.request-card p { color: var(--gray-1); font-size: 1rem; margin-bottom: 0.5rem; line-height: 1.6; }
+.request-card .sub { color: var(--gray-2); font-size: 0.9rem; margin-bottom: 1.2rem; line-height: 1.5; }
+.request-card .btn-request {
+    display: inline-block;
+    padding: 0.7rem 1.8rem;
+    border: 1px solid var(--gray-1);
+    color: var(--gray-1);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.request-card .btn-request:hover { background: var(--gray-1); color: var(--bg); }
 
 .status-badge {
     display: inline-flex;
