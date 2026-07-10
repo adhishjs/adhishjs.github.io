@@ -973,6 +973,89 @@ body.is-loaded .preloader{
     background: var(--white);
     animation: status-pulse 1.6s ease-in-out infinite;
 }
+
+
+
+
+.project-meta-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+    margin: 14px 0 0;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+}
+.project-meta-inline .meta-tag {
+    color: var(--bg);
+    background: var(--gray-1);
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+}
+.project-meta-inline .meta-guide {
+    color: var(--gray-2);
+}
+.project-meta-inline .meta-guide a {
+    color: var(--gray-1);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.project-meta-inline .meta-guide a:hover {
+    color: var(--white);
+}
+
+
+
+
+.doc-block {
+    margin-bottom: 32px;
+}
+.doc-block:last-child {
+    margin-bottom: 0;
+}
+.doc-block-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.doc-block-title {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--gray-1);
+    margin: 0;
+    font-weight: 600;
+}
+.doc-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--gray-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+}
+.doc-download-btn:hover {
+    border-color: var(--white);
+    color: var(--white);
+}
+.doc-download-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+}
+
+
+
+
+
 @keyframes status-pulse {
     0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255,255,255,0.35); }
     50% { opacity: 0.4; box-shadow: 0 0 0 4px rgba(255,255,255,0); }

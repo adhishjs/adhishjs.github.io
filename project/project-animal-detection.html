@@ -311,6 +311,104 @@
     }
     .doc-preview iframe{height:300px;}
   }
+
+        .slides-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-top: 50.625%; 
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--panel);
+        }
+        .slides-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+
+
+.download-bar {
+    margin-top: 20px;
+}
+        .download-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 16px 22px;
+            margin-bottom: 28px;
+            align-items: center;
+        }
+        .download-bar .label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 4px;
+        }
+        .download-bar .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--bg);
+            background: var(--white);
+            border: 1px solid var(--white);
+            border-radius: 6px;
+            transition: opacity 0.2s, transform 0.15s;
+            text-decoration: none;
+        }
+        .download-bar .btn-download:hover {
+            opacity: 0.85;
+            transform: scale(1.01);
+        }
+        .download-bar .btn-download svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+        .download-bar .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none;
+            cursor: pointer;
+            background: transparent;
+        }
+        .download-bar .btn-ghost:hover {
+            border-color: var(--white);
+            color: var(--white);
+        }
+        .download-bar .btn-ghost svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+
+
 </style>
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -340,6 +438,11 @@
       <a href="../experience.html">Experience</a>
       <a href="../contact.html">Contact</a>
     </nav>
+
+
+
+
+    
   </div>
 </header>
 
@@ -349,19 +452,26 @@
       <a class="back-link" href="../projects.html">&larr; Back to Projects</a>
       <h1 class="page-title">Real-Time Animal Detection and Alert System</h1>
       <p class="page-sub">Sep - Nov 2024</p>
-      <div class="project-meta-box" aria-label="Project metadata">
-        <div class="project-meta-row">
-          <span class="project-meta-label">Category</span>
-          <span class="project-meta-value">Internship Project</span>
-        </div>
-        <div class="project-meta-row">
-          <span class="project-meta-label">Guide</span>
-          <span class="project-meta-value"><a href="https://research.nitpy.ac.in/professor_profile/55/" target="_blank" rel="noopener">Dr. Surendar M</a></span>
-        </div>
-        <div class="project-meta-row">
-          <span class="project-meta-label">Team Members</span>
-          <span class="project-meta-value">N Parvathi, N Balakrishna</span>
-        </div>
+
+                <div class="project-meta-inline">
+                    <span class="meta-tag">VLSID DC 2026 Finalist</span>
+                    <span class="meta-guide">Guide: <a href="https://research.nitpy.ac.in/professor_profile/97/" target="_blank" rel="noopener">Dr. Suresh Balanethiram</a></span>
+                </div>
+
+                <div class="download-bar">  
+                    <span class="label">Quick Links</span>
+                    <a class="btn-download" href="https://github.com/adhishjs/Animal-tracker-raspberry-pi" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        GitHub
+                    </a>
+
+                    <!-- Scroll to documents -->
+                    <button class="btn-ghost" onclick="document.getElementById('documents-section').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+                        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        View Documents
+                    </button>
+                </div>
+
     </div>
   </header>
 
@@ -376,12 +486,6 @@
         <span class="tag-pill">IoT</span>
         <span class="tag-pill">Google Drive</span>
         <span class="tag-pill">SMSChef API</span>
-      </div>
-      <div class="card-links">
-        <a class="link-github" href="https://github.com/adhishjs/Animal-tracker-raspberry-pi" target="_blank" rel="noopener" aria-label="Open GitHub profile">
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          GitHub
-        </a>
       </div>
     </div>
   </section>
@@ -656,17 +760,41 @@
     </div>
   </section>
 
-  <section class="section">
+
+
+
+        <!-- ─── DOCUMENTS ─── -->
+        <section class="section section-alt" id="documents-section">
+            <div class="section-inner">
+                <p class="section-label">Documents</p>
+
+                <div class="doc-block">
+                    <div class="doc-block-head">
+                        <p class="doc-block-title"> Presentation </p>
+                        <a class="doc-download-btn" href="../assets/project/animal-detection/project_ppt.pptx" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                            Download PPTX
+                        </a>
+                    </div>
+                    <div class="slides-container">
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vR511i_KLS90l28DaDVfwKiMXvTmXki5YTdbhXWMlxnUVJagO6uiczkD3_bULWoQPf1qNNnp5J3yVVP/pubembed?start=false&loop=false&delayms=60000" frameborder="0" width="1920" height="1109" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>        
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+  <!-- <section class="section" id="documents-section">
     <div class="section-inner">
       <p class="section-label">Presentation</p>
       <div class="doc-actions">
         <a href="../assets/project/animal-detection/project_ppt.pptx" target="_blank" rel="noopener">Open PPTX</a>
       </div>
       <div class="doc-preview">
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vR511i_KLS90l28DaDVfwKiMXvTmXki5YTdbhXWMlxnUVJagO6uiczkD3_bULWoQPf1qNNnp5J3yVVP/pubembed?start=false&loop=false&delayms=60000" frameborder="0" width="1920" height="1109" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>        
       </div>
     </div>
-  </section>
+  </section> -->
 </main>
 
 <div class="lightbox" id="imageLightbox" aria-hidden="true">

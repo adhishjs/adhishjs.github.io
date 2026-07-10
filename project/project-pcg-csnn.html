@@ -76,6 +76,81 @@
             color: var(--bg);
         }
 
+
+.download-bar {
+    margin-top: 20px;
+}
+        .download-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 16px 22px;
+            margin-bottom: 28px;
+            align-items: center;
+        }
+        .download-bar .label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 4px;
+        }
+        .download-bar .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--bg);
+            background: var(--white);
+            border: 1px solid var(--white);
+            border-radius: 6px;
+            transition: opacity 0.2s, transform 0.15s;
+            text-decoration: none;
+        }
+        .download-bar .btn-download:hover {
+            opacity: 0.85;
+            transform: scale(1.01);
+        }
+        .download-bar .btn-download svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+        .download-bar .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-2);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none;
+            cursor: pointer;
+            background: transparent;
+        }
+        .download-bar .btn-ghost:hover {
+            border-color: var(--white);
+            color: var(--white);
+        }
+        .download-bar .btn-ghost svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+
         @media (max-width: 760px) {
             .project-meta-row { grid-template-columns: 1fr; }
             .project-meta-label { border-right: none; border-bottom: 1px solid var(--line); }
@@ -118,20 +193,22 @@
                 <a class="back-link" href="../projects.html">&larr; Back to Projects</a>
                 <h1 class="page-title">Low Power PCG Classification Using 1D CSNN</h1>
                 <p class="page-sub">Jan 2026 – Present</p>
-                <div class="project-meta-box" aria-label="Project metadata">
-                    <div class="project-meta-row">
-                        <span class="project-meta-label">Category</span>
-                        <span class="project-meta-value">Academic Project</span>
-                    </div>
-                    <div class="project-meta-row">
-                        <span class="project-meta-label">Guide</span>
-                        <span class="project-meta-value"><a href="https://research.nitpy.ac.in/professor_profile/97/" target="_blank" rel="noopener">Dr. Suresh Balanethiram</a></span>
-                    </div>
-                    <div class="project-meta-row">
-                        <span class="project-meta-label">Team Members</span>
-                        <span class="project-meta-value">Ridwan Zakkir Hussain, N Balakrishna</span>
-                    </div>
+<div class="project-meta-inline">
+    <span class="meta-tag">Academic Project</span>
+    <span class="meta-guide">Guide: <a href="https://research.nitpy.ac.in/professor_profile/97/" target="_blank" rel="noopener">Dr. Suresh Balanethiram</a></span>
+</div>
+
+
+                <div class="download-bar">  
+                    <span class="label">Quick Links</span>
+
+                    <!-- Scroll to documents -->
+                    <button class="btn-ghost" onclick="document.getElementById('documents-section').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+                        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        View Documents
+                    </button>
                 </div>
+
             </div>
         </header>
 
@@ -224,7 +301,7 @@
 
 
         <!-- ─── REPORT (Contact for Access) ─── -->
-        <section class="section section-alt">
+        <section class="section section-alt" id="documents-section">
             <div class="section-inner">
                 <p class="section-label">Report &amp; Presentation</p>
                 <div class="contact-card">
